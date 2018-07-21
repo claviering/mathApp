@@ -1,12 +1,12 @@
 <template>
     <div id="tabbar">
-        <router-link to="" tag="div" class="box">
+        <router-link to="/bank" tag="div" class="box">
             <div>{{my_bank}}</div>
         </router-link>
-        <router-link to="" tag="div" class="box">
+        <router-link to="/addKnow" tag="div" class="box">
             <div>{{mind_map}}</div>
         </router-link>
-        <router-link to="" tag="div" class="box">
+        <router-link to="/me" tag="div" class="box">
             <div>{{me}}</div>
         </router-link>
     </div>

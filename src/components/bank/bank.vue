@@ -1,9 +1,9 @@
 <template>
     <div class="bank">
         <ol class="know_list">
-            <router-link tag="li" to="/detail" v-on:click="changeHead" class="bank_li" v-for="value in items" :key="value.id">{{value}}</router-link>
+            <li v-on:click="changeToliHead" class="bank_li" v-for="value in items" :key="value.id">{{value}}</li>
         </ol>
-        <div class="bank_add">
+        <div class="bank_add" v-on:click="addKnow">
             <span class="icon-add"></span>
         </div>
     </div>
@@ -21,8 +21,12 @@ export default{
     }
   },
   methods: {
-    changeHead: function () {
-
+    changeToliHead: function () {
+      this.$store.commit('change', 3)
+      this.$router.push('/detail')
+    },
+    addKnow: function () {
+      this.$router.push('/addKnow')
     }
   }
 }
@@ -46,6 +50,7 @@ export default{
         line-height: 150%;
     }
     .bank_add{
+        width: 10%;
         margin-top: 20px;
         margin-left: 10%;
     }

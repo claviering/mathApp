@@ -26,30 +26,28 @@ export default{
   ],
   methods: {
     changeHead: function () {
-      this.nowPage = this.nowPage + 1
-      console.log(this.nowPage)
-      this.$emit('send', this.nowPage)
-      var tmp = this.nowPage
-      if (tmp === 2) {
+      if (this.$store.state.nowPage === 0) {
+        this.$router.push('/addTopic')
+        this.$store.commit('change', 1)
+      } else if (this.$store.state.nowPage === 1) {
         this.$router.push('/classify')
-        this.$emit('send', this.nowPage)
-      } else if (tmp === 3) {
+        this.$store.commit('change', 2)
+      } else if (this.$store.state.nowPage === 2) {
         this.$router.push('/bank')
-        this.nowPage = 0
-        this.$emit('send', this.nowPage)
+        this.$store.commit('change', 0)
       }
     },
     goBack: function () {
-      var tmp = this.nowPage
-      if (tmp === 1) {
+      if (this.$store.state.nowPage === 1) {
         this.$router.push('/bank')
-      } else if (tmp === 2) {
+        this.$store.commit('change', 0)
+      } else if (this.$store.state.nowPage === 2) {
         this.$router.push('/addTopic')
-      } else if (tmp === 3) {
+        this.$store.commit('change', 1)
+      } else if (this.$store.state.nowPage === 3) {
         this.$router.push('/bank')
-        this.nowPage = 0
+        this.$store.commit('change', 0)
       }
-      this.$emit('send', this.nowPage)
     }
   }
 }
@@ -81,16 +79,19 @@ export default{
         position: absolute;
         right: 7%;
     }
+    .title1LeftIcon:after{
+        content: '返回';
+    }
+    .title1RightIcon:after{
+        content: '保存';
+    }
     .title2LeftIcon:after{
         content: '返回';
     }
     .title2RightIcon:after{
-        content: '保存';
+        content: '确定';
     }
     .title3LeftIcon:after{
         content: '返回';
-    }
-    .title3RightIcon:after{
-        content: '确定';
     }
 </style>
