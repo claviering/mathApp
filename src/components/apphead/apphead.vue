@@ -1,9 +1,10 @@
 <template>
   <div class="apphead">
-    <commonHead :left_icon="left_icon" :middle_title="middle_title" :right_icon="right_icon" :nowSide="side[0]" v-if="side[0] == Hindex"></commonHead>
-    <commonHead :left_icon="title1LeftIcon" :middle_title='title1' :right_icon="title1RightIcon" :nowSide="side[1]" v-if="side[1] == Hindex"></commonHead>
-    <commonHead :left_icon="title2LeftIcon" :middle_title='title2' :right_icon="title2RightIcon" :nowSide="side[2]" v-if="side[2] == Hindex"></commonHead>
-    <commonHead :left_icon="title3LeftIcon" :middle_title='title3' :right_icon="title3RightIcon" :nowSide="side[3]" v-if="side[3] == Hindex"></commonHead>
+    <commonHead :left_icon="left_icon" :middle_title="middle_title" :right_icon="right_icon" v-if="side[0] == Hindex"></commonHead>
+    <commonHead :left_icon="title1LeftIcon" :middle_title='title1' :right_icon="title1RightIcon" v-if="side[1] == Hindex"></commonHead>
+    <commonHead :left_icon="title2LeftIcon" :middle_title='title2' :right_icon="title2RightIcon" v-if="side[2] == Hindex"></commonHead>
+    <commonHead :left_icon="title3LeftIcon" :middle_title='title3' :right_icon="title3RightIcon" v-if="side[3] == Hindex"></commonHead>
+    <commonHead :left_icon="title4LeftIcon" :middle_title='title4' :right_icon="title4RightIcon" v-if="side[4] == Hindex"></commonHead>
   </div>
 </template>
 
@@ -26,7 +27,10 @@ export default {
       title2RightIcon: 'title2RightIcon',
       title3LeftIcon: 'title3LeftIcon',
       title3: '知识点',
-      title3RightIcon: 'icon-more'
+      title3RightIcon: 'icon-more',
+      title4LeftIcon: 'title2LeftIcon',
+      title4: '登录',
+      title4RightIcon: ''
     }
   },
   components: {

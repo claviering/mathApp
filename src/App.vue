@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <apphead></apphead>
+    <leftSideBox></leftSideBox>
     <router-view></router-view>
     <tabbar></tabbar>
   </div>
@@ -10,6 +11,7 @@
 
 import tabbar from './components/tabbar/tabbar.vue'
 import apphead from './components/apphead/apphead.vue'
+import leftSideBox from './components/leftSideBox/leftSideBox.vue'
 
 export default {
   name: 'App',
@@ -19,7 +21,8 @@ export default {
   },
   components: {
     'tabbar': tabbar,
-    'apphead': apphead
+    'apphead': apphead,
+    'leftSideBox': leftSideBox
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1>模版一</h1>
+    <div class="addKnow">
+        <h1>这里是思维导图界面</h1>
     </div>
 </template>
 
@@ -11,5 +11,8 @@ export default {
 </script>
 
 <style scoped>
-
+.addKnow{
+    width: 100%;
+    height: 84%;
+}
 </style>

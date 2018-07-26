@@ -9,21 +9,27 @@ import classify from './components/classify/classify.vue'
 import detail from './components/detail/detail.vue'
 import addKnow from './components/addKnow/addKnow.vue'
 import me from './components/me/me.vue'
+import develop from './components/develop/develop.vue'
+import loginIn from './components/loginIn/loginIn.vue'
+import { Form } from 'bootstrap-vue/es/components'
 import storeConfig from './store/store.js'
 import './site.css'
 Vue.use(VueRouter)
+Vue.use(Form)
 
 Vue.config.productionTip = false
 
 var router1 = new VueRouter({
   routes: [
-    {path: '', redirect: '/bank'},
+    {path: '', redirect: '/addKnow'},
     {path: '/bank', component: bank},
     {path: '/addTopic', component: addTopic},
     {path: '/classify', component: classify},
     {path: '/detail', component: detail},
     {path: '/addKnow', component: addKnow},
-    {path: '/me', component: me}
+    {path: '/me', component: me},
+    {path: '/develop', component: develop},
+    {path: '/loginIn', component: loginIn}
   ]
 })
 

@@ -47,6 +47,12 @@ export default{
       } else if (this.$store.state.nowPage === 3) {
         this.$router.push('/bank')
         this.$store.commit('change', 0)
+      } else if (this.$store.state.nowPage === 4) {
+        this.$router.push('/bank')
+        this.$store.commit('change', 0)
+        this.$store.commit('changeShow')
+      } else if (this.$store.state.nowPage === 0) {
+        this.$store.commit('changeLeftSideShow')
       }
     }
   }

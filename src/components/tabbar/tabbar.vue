@@ -6,8 +6,8 @@
         <router-link to="/addKnow" tag="div" class="box">
             <div>{{mind_map}}</div>
         </router-link>
-        <router-link to="/me" tag="div" class="box">
-            <div>{{me}}</div>
+        <router-link to="/develop" tag="div" class="box">
+            <div>{{develop}}</div>
         </router-link>
     </div>
 </template>
@@ -18,7 +18,7 @@ export default{
     return {
       my_bank: '我的题库',
       mind_map: '思维导图',
-      me: '个人中心'
+      develop: '有待开发'
     }
   }
 }
@@ -41,7 +41,7 @@ export default{
         height: 100%;
         width: 33%;
         color: #000;
-        font-size: 1.5em;
+        font-size: 1em;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -51,5 +51,8 @@ export default{
     }
     .box:first-child{
         width: 34%;
+    }
+    .router-link-active{
+        color: green;
     }
 </style>
