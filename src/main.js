@@ -11,11 +11,14 @@ import addKnow from './components/addKnow/addKnow.vue'
 import me from './components/me/me.vue'
 import develop from './components/develop/develop.vue'
 import loginIn from './components/loginIn/loginIn.vue'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 import { Form } from 'bootstrap-vue/es/components'
 import storeConfig from './store/store.js'
 import './site.css'
 Vue.use(VueRouter)
 Vue.use(Form)
+Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 

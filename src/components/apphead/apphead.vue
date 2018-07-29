@@ -48,5 +48,7 @@ export default {
     .apphead{
         width: 100%;
         height: 8%;
+        background-color: black;
+        color: white;
     }
 </style>

@@ -32,7 +32,7 @@ export default{
 .leftSideBox{
     height: 84%;
     width: 40%;
-    background-color: rgb(235,235,235);
+    background-color: black;
     z-index: 100;
     position: absolute;
 }
@@ -54,13 +54,13 @@ export default{
 }
 .leftSideInfo p{
     text-decoration: underline;
-    color: blue;
+    color: white;
 }
 .goRight-enter, .goRight-leave-to{
     left: -40%;
 }
 .goRight-enter-active, .goRight-leave-active{
-    transition: left 1s;
+    transition: left 0.5s;
 }
 .goRight-enter-to, .goRight-leave{
     left: 0%;

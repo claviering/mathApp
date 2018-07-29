@@ -45,15 +45,17 @@ module.exports = {
 
   build: {
     // Template for index.html
-    // index: path.resolve(__dirname, '../../www/index.html'),
-    index: path.resolve(__dirname, '../dist/index.html'),
+    // index: path.resolve(__dirname, '../dist/index.html'),
+    // assetsRoot: path.resolve(__dirname, '../dist'),
+    // assetsPublicPath: '/',
+    
+    // Template for android apk
+    index: path.resolve(__dirname, '../../www/index.html'),
+    assetsRoot: path.resolve(__dirname, '../../www/'),
+    assetsPublicPath: '',
 
     // Paths
-    // assetsRoot: path.resolve(__dirname, '../../www/'),
-    assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    // assetsPublicPath: '',
-    assetsPublicPath: '/',
     /**
      * Source Maps
      */
