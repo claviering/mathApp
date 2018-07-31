@@ -18,7 +18,7 @@ export default{
     return {
       my_bank: '我的题库',
       mind_map: '思维导图',
-      develop: '有待开发'
+      develop: '社交圈'
     }
   }
 }

@@ -4,18 +4,18 @@
             <div class="quesText">题目</div>
             <el-input
               type="textarea"
-              :autosize="{ minRows: 6, maxRows: 8}"
+              :autosize="{ minRows: 5, maxRows: 8}"
               placeholder="请输入题目"
-              v-model="textarea3">
+              v-model="textarea1">
             </el-input>
         </div>
         <div class="point">
             <div class="pointText">解题思路/提示</div>
             <el-input
               type="textarea"
-              :autosize="{ minRows: 6, maxRows: 8}"
+              :autosize="{ minRows: 5, maxRows: 8}"
               placeholder="请输入思路，提示"
-              v-model="textarea3">
+              v-model="textarea2">
             </el-input>
         </div>
         <div class="point">
@@ -34,6 +34,8 @@
 export default{
   data () {
     return {
+      textarea1: '',
+      textarea2: '',
       textarea3: ''
     }
   }
@@ -44,7 +46,9 @@ export default{
 <style scoped>
 .addTopic{
     height: 84%;
-    width: 100%;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 .ques{
     width: 100%;
@@ -57,6 +61,8 @@ export default{
     font-size: 2em;
     display: flex;
     align-items: center;
+    justify-content: center;
+    padding-bottom: 3%;
 }
 .point{
     width: 100%;
@@ -70,5 +76,7 @@ export default{
     font-size: 1.5em;
     display: flex;
     align-items: center;
+    justify-content: center;
+    padding-bottom: 6%;
 }
 </style>

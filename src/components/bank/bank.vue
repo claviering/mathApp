@@ -67,7 +67,7 @@ export default{
 <style scoped>
 @import './dis/style.css';
 .bank{
-    width: 100%;
+    width: 90%;
     height: 84%;
     padding-left: 10%;
 }
@@ -78,6 +78,7 @@ export default{
 }
 .icon-add{
     font-size: 2em;
+    padding-bottom: 60px;
 }
 .title{
     margin-left: 10%;

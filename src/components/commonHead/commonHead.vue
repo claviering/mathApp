@@ -26,32 +26,38 @@ export default{
   ],
   methods: {
     changeHead: function () {
-      if (this.$store.state.nowPage === 0) {
+      let nPage = this.$store.state.nowPage
+      if (nPage === 0) {
         this.$router.push('/addTopic')
         this.$store.commit('change', 1)
-      } else if (this.$store.state.nowPage === 1) {
+        this.$store.commit('hideTabbarShow')
+      } else if (nPage === 1) {
         this.$router.push('/classify')
         this.$store.commit('change', 2)
-      } else if (this.$store.state.nowPage === 2) {
+      } else if (nPage === 2) {
         this.$router.push('/bank')
         this.$store.commit('change', 0)
+        this.$store.commit('showTabbar')
       }
     },
     goBack: function () {
-      if (this.$store.state.nowPage === 1) {
+      let nPage = this.$store.state.nowPage
+      if (nPage === 1) {
         this.$router.push('/bank')
         this.$store.commit('change', 0)
-      } else if (this.$store.state.nowPage === 2) {
+        this.$store.commit('showTabbar')
+      } else if (nPage === 2) {
         this.$router.push('/addTopic')
         this.$store.commit('change', 1)
-      } else if (this.$store.state.nowPage === 3) {
+      } else if (nPage === 3) {
         this.$router.push('/bank')
         this.$store.commit('change', 0)
-      } else if (this.$store.state.nowPage === 4) {
+      } else if (nPage === 4) {
         this.$router.push('/bank')
         this.$store.commit('change', 0)
         this.$store.commit('changeShow')
-      } else if (this.$store.state.nowPage === 0) {
+        this.$store.commit('showTabbar')
+      } else if (nPage === 0) {
         this.$store.commit('changeLeftSideShow')
       }
     }

@@ -7,6 +7,9 @@
             <div class="leftSideInfo">
                <p v-on:click="loginIn">登录</p>
             </div>
+            <div class="leftSetting">
+              <p id="setting">设置</p>
+            </div>
         </div>
     </transition>
 </template>
@@ -22,6 +25,7 @@ export default{
     loginIn: function () {
       this.$store.commit('changeLeftSideShow')
       this.$router.push('/loginIn')
+      this.$store.commit('hideTabbarShow')
       this.$store.commit('change', 4)
     }
   }
@@ -53,8 +57,21 @@ export default{
     border-bottom-style: solid;
 }
 .leftSideInfo p{
-    text-decoration: underline;
     color: white;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.leftSetting{
+  position: relative;
+  bottom: -60%;
+  display: flex;
+  justify-content: center;
+}
+.leftSetting > p{
+  margin: 0px;
+    color: white;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 .goRight-enter, .goRight-leave-to{
     left: -40%;

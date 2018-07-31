@@ -3,7 +3,7 @@
     <apphead></apphead>
     <leftSideBox></leftSideBox>
     <router-view></router-view>
-    <tabbar></tabbar>
+    <tabbar v-show="showTabbar"></tabbar>
   </div>
 </template>
 
@@ -17,12 +17,18 @@ export default {
   name: 'App',
   data () {
     return {
+      animate: ''
     }
   },
   components: {
     'tabbar': tabbar,
     'apphead': apphead,
     'leftSideBox': leftSideBox
+  },
+  computed: {
+    showTabbar: function () {
+      return this.$store.state.ShowTabbar
+    }
   }
 }
 </script>

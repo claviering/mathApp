@@ -22,9 +22,11 @@ export default {
         url2: 'b',
         url3: 'c',
         url4: 'd',
-        url5: 'e'
+        url5: 'e',
+        url6: 'f'
       },
       items2: {
+        url0: 'f',
         url1: 'e',
         url2: 'd',
         url3: 'c',
@@ -57,31 +59,37 @@ export default {
 .a{
     width: 100%;
     height: 100%;
-    background-image: url(img/1.jpeg);
+    background-image: url(./../../../static/img/1.jpeg);
     background-size: 100%;
 }
 .b{
     width: 100%;
     height: 100%;
-    background-image: url(img/2.jpeg);
+    background-image: url(./../../../static/img/2.jpeg);
     background-size: 100%;
 }
 .c{
     width: 100%;
     height: 100%;
-    background-image: url(img/3.jpeg);
+    background-image: url(./../../../static/img/3.jpeg);
     background-size: 100%;
 }
 .d{
     width: 100%;
     height: 100%;
-    background-image: url(img/4.jpeg);
+    background-image: url(./../../../static/img/4.jpeg);
     background-size: 100%;
 }
 .e{
     width: 100%;
     height: 100%;
-    background-image: url(img/5.jpeg);
+    background-image: url(./../../../static/img/5.jpeg);
+    background-size: 100%;
+}
+.f{
+    width: 100%;
+    height: 100%;
+    background-image: url(./../../../static/img/6.jpg);
     background-size: 100%;
 }
 </style>
