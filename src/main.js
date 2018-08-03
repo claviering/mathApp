@@ -11,6 +11,7 @@ import addKnow from './components/addKnow/addKnow.vue'
 import me from './components/me/me.vue'
 import develop from './components/develop/develop.vue'
 import loginIn from './components/loginIn/loginIn.vue'
+import setting from './components/setting/setting.vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import { Form } from 'bootstrap-vue/es/components'
@@ -32,7 +33,8 @@ var router1 = new VueRouter({
     {path: '/addKnow', component: addKnow},
     {path: '/me', component: me},
     {path: '/develop', component: develop},
-    {path: '/loginIn', component: loginIn}
+    {path: '/loginIn', component: loginIn},
+    {path: '/setting', component: setting}
   ]
 })
 

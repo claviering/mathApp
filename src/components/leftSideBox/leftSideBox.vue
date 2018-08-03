@@ -7,7 +7,7 @@
             <div class="leftSideInfo">
                <p v-on:click="loginIn">登录</p>
             </div>
-            <div class="leftSetting">
+            <div class="leftSetting" v-on:click="goSetting">
               <p id="setting">设置</p>
             </div>
         </div>
@@ -27,6 +27,10 @@ export default{
       this.$router.push('/loginIn')
       this.$store.commit('hideTabbarShow')
       this.$store.commit('change', 4)
+    },
+    goSetting: function () {
+      this.$store.commit('changeLeftSideShow')
+      this.$router.push('/setting')
     }
   }
 }
