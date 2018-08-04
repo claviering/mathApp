@@ -2,7 +2,10 @@
   <div id="app">
     <apphead></apphead>
     <leftSideBox></leftSideBox>
-    <router-view></router-view>
+    <block></block>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
     <tabbar v-show="showTabbar"></tabbar>
   </div>
 </template>
@@ -12,6 +15,7 @@
 import tabbar from './components/tabbar/tabbar.vue'
 import apphead from './components/apphead/apphead.vue'
 import leftSideBox from './components/leftSideBox/leftSideBox.vue'
+import block from './components/block/block.vue'
 
 export default {
   name: 'App',
@@ -23,7 +27,8 @@ export default {
   components: {
     'tabbar': tabbar,
     'apphead': apphead,
-    'leftSideBox': leftSideBox
+    'leftSideBox': leftSideBox,
+    'block': block
   },
   computed: {
     showTabbar: function () {

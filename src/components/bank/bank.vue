@@ -1,31 +1,32 @@
+<!-- 题库组件 -->
 <template>
     <div class="bank">
         <el-collapse v-model="activeNames" @change="handleChange">
-          <el-collapse-item title="知识点1" name="1">
+          <el-collapse-item :title="lang[index].point" name="1">
             <div>可以说我是肥宅，但不可以说我是死肥宅</div>
             <div>可以说我是肥宅，但不可以说我是死肥宅</div>
           </el-collapse-item>
-          <el-collapse-item title="知识点2" name="2">
+          <el-collapse-item :title="lang[index].point" name="2">
             <div>可以说我是肥宅，但不可以说我是死肥宅</div>
             <div>可以说我是肥宅，但不可以说我是死肥宅</div>
           </el-collapse-item>
-          <el-collapse-item title="知识点3" name="3">
+          <el-collapse-item :title="lang[index].point" name="3">
             <div>可以说我是肥宅，但不可以说我是死肥宅</div>
             <div>可以说我是肥宅，但不可以说我是死肥宅</div>
           </el-collapse-item>
-          <el-collapse-item title="知识点4" name="4">
+          <el-collapse-item :title="lang[index].point" name="4">
             <div>可以说我是肥宅，但不可以说我是死肥宅</div>
             <div>可以说我是肥宅，但不可以说我是死肥宅</div>
           </el-collapse-item>
-          <el-collapse-item title="知识点5" name="5">
+          <el-collapse-item :title="lang[index].point" name="5">
             <div>可以说我是肥宅，但不可以说我是死肥宅</div>
             <div>可以说我是肥宅，但不可以说我是死肥宅</div>
           </el-collapse-item>
-          <el-collapse-item title="知识点6" name="6">
+          <el-collapse-item :title="lang[index].point" name="6">
             <div>可以说我是肥宅，但不可以说我是死肥宅</div>
             <div>可以说我是肥宅，但不可以说我是死肥宅</div>
           </el-collapse-item>
-          <el-collapse-item title="知识点7" name="7">
+          <el-collapse-item :title="lang[index].point" name="7">
             <div>可以说我是肥宅，但不可以说我是死肥宅</div>
             <div>可以说我是肥宅，但不可以说我是死肥宅</div>
           </el-collapse-item>
@@ -41,6 +42,7 @@
 export default{
   data () {
     return {
+      lang: [{point: '知识点'}, {point: 'Point'}],
       items: {
         one: '知识点一',
         two: '知识点二',
@@ -59,6 +61,11 @@ export default{
     },
     handleChange: function () {
       console.log('11')
+    }
+  },
+  computed: {
+    index: function () {
+      return this.$store.state.language
     }
   }
 }

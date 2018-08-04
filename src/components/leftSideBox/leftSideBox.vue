@@ -5,10 +5,10 @@
                 <img src="../../../static/img/th.jpg">
             </div>
             <div class="leftSideInfo">
-               <p v-on:click="loginIn">登录</p>
+               <p v-on:click="loginIn">{{lang[index].login}}</p>
             </div>
             <div class="leftSetting" v-on:click="goSetting">
-              <p id="setting">设置</p>
+              <p id="setting">{{lang[index].setting}}</p>
             </div>
         </div>
     </transition>
@@ -16,9 +16,17 @@
 
 <script>
 export default{
+  data () {
+    return {
+      lang: [{login: '登录', setting: '设置'}, {login: 'Log In', setting: 'Setting'}]
+    }
+  },
   computed: {
     leftSideShow: function () {
       return this.$store.state.leftSideShow
+    },
+    index: function () {
+      return this.$store.state.language
     }
   },
   methods: {
@@ -31,6 +39,7 @@ export default{
     goSetting: function () {
       this.$store.commit('changeLeftSideShow')
       this.$router.push('/setting')
+      this.$store.commit('change', 5)
     }
   }
 }
@@ -40,7 +49,7 @@ export default{
 .leftSideBox{
     height: 84%;
     width: 40%;
-    background-color: black;
+    background-color: rgba(0,0,0,0.5);
     z-index: 100;
     position: absolute;
 }

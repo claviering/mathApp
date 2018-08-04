@@ -51,9 +51,9 @@ export default{
 <style scopd>
 .setting{
     width: 100%;
-    height: 100%;
+    height: 92%;
     position: absolute;
-    top: 0px;
+    bottom: 0px;
     left: 0px;
     background-color: rgb(235, 235, 235);
     z-index: 51;

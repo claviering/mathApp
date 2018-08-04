@@ -1,70 +1,70 @@
 <template>
   <div class="loginIn">
       <el-tabs v-model="activeName2" type="card">
-        <el-tab-pane label="Sign In" name="first">
+        <el-tab-pane :label="lang[index].signIn" name="first">
             <b-form @submit="onSubmit" @reset="onReset" v-if="show">
               <b-form-group id="exampleInputGroup2"
-                            label="Your Name:"
+                            :label="lang[index].name"
                             label-for="exampleInput2">
                 <b-form-input id="exampleInput2"
                               type="text"
                               v-model="form.name"
                               required
-                              placeholder="Enter name">
+                              :placeholder="lang[index].pleaseInputName">
                 </b-form-input>
               </b-form-group>
               <b-form-group id="exampleInputGroup1"
-                            label="Password:"
+                            :label="lang[index].password"
                             label-for="exampleInput1"
                             description="">
                 <b-form-input id="exampleInput1"
                               v-model="form.password"
                               required
-                              placeholder="Enter password">
+                              :placeholder="lang[index].pleaseInputPassword">
                 </b-form-input>
               </b-form-group>
 
               <b-form-group id="exampleGroup4">
               </b-form-group>
-              <b-form-checkbox value="me">Remeber me</b-form-checkbox>
-              <b-button id="loginButton" type="submit" variant="primary">Sign In</b-button>
+              <b-form-checkbox value="me">{{lang[index].remeberMe}}</b-form-checkbox>
+              <b-button id="loginButton" type="submit" variant="primary">{{lang[index].signIn}}</b-button>
             </b-form>
         </el-tab-pane>
-        <el-tab-pane label="Sign Up" name="second">
+        <el-tab-pane :label="lang2[index].signUp" name="second">
             <b-form @submit="onSubmit" @reset="onReset" v-if="show">
               <b-form-group id="exampleInputGroup2"
-                            label="Your Name:"
+                            :label="lang2[index].name"
                             label-for="exampleInput2">
                 <b-form-input id="exampleInput2"
                               type="text"
                               v-model="form.name"
                               required
-                              placeholder="Enter name">
+                              :placeholder="lang2[index].name">
                 </b-form-input>
               </b-form-group>
               <b-form-group id="exampleInputGroup1"
-                            label="Password:"
+                            :label="lang2[index].password"
                             label-for="exampleInput1"
                             description="">
                 <b-form-input id="exampleInput1"
                               v-model="form.password"
                               required
-                              placeholder="Enter password">
+                              :placeholder="lang2[index].password">
                 </b-form-input>
               </b-form-group>
               <b-form-group id="exampleInputGroup1"
-                            label="Password again:"
+                            :label="lang2[index].passwordAgain"
                             label-for="exampleInput2"
                             description="">
                 <b-form-input id="exampleInput2"
                               v-model="form.password"
                               required
-                              placeholder="Enter password">
+                              :placeholder="lang2[index].passwordAgain">
                 </b-form-input>
               </b-form-group>
               <b-form-group id="exampleGroup4">
               </b-form-group>
-              <b-button id="loginButton" type="submit" variant="primary">Sign Up</b-button>
+              <b-button id="loginButton" type="submit" variant="primary">{{lang2[index].signUp}}</b-button>
             </b-form>
         </el-tab-pane>
       </el-tabs>
@@ -81,6 +81,10 @@ Vue.component('b-form', BootstrapVue.bForm)
 export default {
   data () {
     return {
+      lang: [{signIn: '登录', name: '你的名字: ', pleaseInputName: '请输入名字', password: '密码', pleaseInputPassword: '请输入密码', remeberMe: '自动登录'},
+        {signIn: 'Sign In', name: 'Your Name: ', pleaseInputName: 'Please Input Name', password: 'password', pleaseInputPassword: 'Please Input Password', remeberMe: 'Remeber Me'}],
+      lang2: [{signUp: '注册', name: '你的名字: ', password: '密码: ', passwordAgain: '确认密码'},
+        {signUp: 'Sign Up', name: 'Your Name: ', password: 'Password: ', passwordAgain: 'Password Again'}],
       form: {
         password: '',
         name: ''
@@ -101,6 +105,11 @@ export default {
       /* Trick to reset/clear native browser form validation state */
       this.show = false
       this.$nextTick(() => { this.show = true })
+    }
+  },
+  computed: {
+    index: function () {
+      return this.$store.state.language
     }
   }
 }

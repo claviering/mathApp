@@ -2,12 +2,12 @@
     <div class="addKnow">
       <el-carousel indicator-position="none">
         <el-carousel-item v-for="item in items" :key="item">
-            <div :class="item">我是思维导图</div>
+            <div :class="item"></div>
         </el-carousel-item>
       </el-carousel>
       <el-carousel indicator-position="none">
         <el-carousel-item v-for="item in items2" :key="item">
-            <div :class="item">我是思维导图</div>
+            <div :class="item"></div>
         </el-carousel-item>
       </el-carousel>
     </div>

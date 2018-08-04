@@ -1,13 +1,13 @@
 <template>
-    <div id="tabbar">
+    <div id="tabbar" v-on:click="clickTabbar">
         <router-link to="/bank" tag="div" class="box">
-            <div>{{my_bank}}</div>
+            <div>{{lang[index].my_bank}}</div>
         </router-link>
         <router-link to="/addKnow" tag="div" class="box">
-            <div>{{mind_map}}</div>
+            <div>{{lang[index].mind_map}}</div>
         </router-link>
         <router-link to="/develop" tag="div" class="box">
-            <div>{{develop}}</div>
+            <div>{{lang[index].develop}}</div>
         </router-link>
     </div>
 </template>
@@ -16,9 +16,23 @@
 export default{
   data () {
     return {
+      lang: [{my_bank: '我的题库', mind_map: '思维导图', develop: '社交'},
+        {my_bank: 'My Bank', mind_map: 'Mind Map', develop: 'Discover'}],
       my_bank: '我的题库',
       mind_map: '思维导图',
-      develop: '社交圈'
+      develop: '社交'
+    }
+  },
+  methods: {
+    clickTabbar: function () {
+      if (this.$store.state.leftSideShow) {
+        this.$store.commit('changeLeftSideShow')
+      }
+    }
+  },
+  computed: {
+    index: function () {
+      return this.$store.state.language
     }
   }
 }

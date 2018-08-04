@@ -59,6 +59,9 @@ export default{
         this.$store.commit('showTabbar')
       } else if (nPage === 0) {
         this.$store.commit('changeLeftSideShow')
+      } else if (nPage === 5) {
+        this.$router.go(-1)
+        this.$store.commit('change', 0)
       }
     }
   }
@@ -97,13 +100,16 @@ export default{
     .title1RightIcon:after{
         content: '保存';
     }
-    .title2LeftIcon:after{
-        content: '返回';
-    }
     .title2RightIcon:after{
         content: '确定';
     }
-    .title3LeftIcon:after{
-        content: '返回';
+    .title1LeftIconEn:after{
+        content: 'Back';
+    }
+    .title1RightIconEn:after{
+        content: 'Save';
+    }
+    .title2RightIconEn:after{
+        content: 'Submit';
     }
 </style>

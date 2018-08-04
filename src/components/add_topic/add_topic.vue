@@ -1,29 +1,29 @@
 <template>
     <div class="addTopic">
         <div class="ques">
-            <div class="quesText">题目</div>
+            <div class="quesText">{{lang[index].title}}</div>
             <el-input
               type="textarea"
               :autosize="{ minRows: 5, maxRows: 8}"
-              placeholder="请输入题目"
+              :placeholder="lang[index].pleaseTitle"
               v-model="textarea1">
             </el-input>
         </div>
         <div class="point">
-            <div class="pointText">解题思路/提示</div>
+            <div class="pointText">{{lang[index].point}}</div>
             <el-input
               type="textarea"
               :autosize="{ minRows: 5, maxRows: 8}"
-              placeholder="请输入思路，提示"
+              :placeholder="lang[index].pleasePoint"
               v-model="textarea2">
             </el-input>
         </div>
         <div class="point">
-            <div class="pointText">答案</div>
+            <div class="pointText">{{lang[index].ans}}</div>
             <el-input
               type="textarea"
               :autosize="{ minRows: 4, maxRows: 6}"
-              placeholder="请输入答案"
+              :placeholder="lang[index].pleaseAns"
               v-model="textarea3">
             </el-input>
         </div>
@@ -34,9 +34,16 @@
 export default{
   data () {
     return {
+      lang: [{title: '题目', point: '解题思路/提示', ans: '答案', pleaseTitle: '请输入题目', pleasePoint: '请输入思路，提示', pleaseAns: '请输入答案'},
+        {title: 'Title', point: 'Point', ans: 'answer', pleaseTitle: 'Please Input Title', pleasePoint: 'Please Input Point', pleaseAns: 'Please Input Answer'}],
       textarea1: '',
       textarea2: '',
       textarea3: ''
+    }
+  },
+  computed: {
+    index: function () {
+      return this.$store.state.language
     }
   }
 }
