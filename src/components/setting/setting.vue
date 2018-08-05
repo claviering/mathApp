@@ -13,8 +13,8 @@
       </div>
       <div class="settingBox2">
           <el-button>{{LanguageObjArray[index].about}}</el-button>
-          <el-button>{{LanguageObjArray[index].switchAccount}}</el-button>
-          <el-button>{{LanguageObjArray[index].logOut}}</el-button>
+          <el-button style="margin-left: 0px">{{LanguageObjArray[index].switchAccount}}</el-button>
+          <el-button style="margin-left: 0px">{{LanguageObjArray[index].logOut}}</el-button>
       </div>
    </div>
 </template>

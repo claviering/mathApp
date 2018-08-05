@@ -10,6 +10,7 @@
                               type="text"
                               v-model="form.name"
                               required
+                              @keydown="inputingName"
                               :placeholder="lang[index].pleaseInputName">
                 </b-form-input>
               </b-form-group>
@@ -94,8 +95,12 @@ export default {
     }
   },
   methods: {
+    inputingName () {
+      console.log(this.form.name)
+    },
     onSubmit () {
-      console.log(this.form)
+      console.log(this.form.name)
+      console.log(this.form.password)
     },
     onReset (evt) {
       evt.preventDefault()
@@ -105,6 +110,11 @@ export default {
       /* Trick to reset/clear native browser form validation state */
       this.show = false
       this.$nextTick(() => { this.show = true })
+    },
+    checkName: function (str) {
+      if (str.length < 2 && str.length > 10) {
+        return 0
+      } else if (str.)
     }
   },
   computed: {
