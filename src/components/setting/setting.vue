@@ -42,7 +42,6 @@ export default{
     selected: function (value) {
       this.$store.commit('changeLanguage', value)
       this.index = value
-      console.log(value)
     }
   }
 }
@@ -57,23 +56,29 @@ export default{
     left: 0px;
     background-color: rgb(235, 235, 235);
     z-index: 51;
+    margin: 0;
 }
-.setting  .el-button{
+.setting .el-button{
+    outline:none;
     width: 100%;
-    margin: 1px 0 1px 0;
+    margin-top: 1px;
+    margin-left: 0px;
     text-align: left;
     border: 0px;
 }
 .el-select{
     width: 100%;
-    margin: 1px 0 1px 0;
+    margin: 1px 0 0 0;
     text-align: left;
     border: 0px;
 }
 .el-select input::-webkit-input-placeholder{
     color: black;
 }
-.settingBox1, .settingBox2{
-    margin: 10% 0 10% 0;
+.settingBox1{
+  margin-top: 10%;
+}
+.settingBox2{
+  margin-top: 10%;
 }
 </style>
