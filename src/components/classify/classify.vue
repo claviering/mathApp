@@ -18,8 +18,8 @@ export default{
   data () {
     return {
       lang: [{classify1: '分类1', classify2: '分类2', classify3: '分类3', classify4: '分类4', classify5: '分类5', classify6: '分类6', classify7: '分类7', classify8: '分类8'},
-        {classify1: 'classify', classify2: 'classify', classify3: 'classify', classify4: 'classify', classify5: 'classify', classify6: 'classify', classify7: 'classify', classify8: 'classify'}],
-      checkList: ['分类1']
+        {classify1: 'classify1', classify2: 'classify2', classify3: 'classify3', classify4: 'classify4', classify5: 'classify5', classify6: 'classify6', classify7: 'classify7', classify8: 'classify8'}],
+      checkList: ['分类1', 'classify1'] // 返回选中的项
     }
   },
   computed: {

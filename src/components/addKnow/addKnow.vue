@@ -1,3 +1,4 @@
+<!-- 思维导图界面 -->
 <template>
     <div class="addKnow">
       <el-carousel indicator-position="none">
@@ -10,6 +11,9 @@
             <div :class="item"></div>
         </el-carousel-item>
       </el-carousel>
+      <div class="addMind">
+          <span class="icon-add"></span>
+      </div>
     </div>
 </template>
 
@@ -39,6 +43,7 @@ export default {
 </script>
 
 <style scoped>
+@import './../bank/dis/style.css';
 .addKnow{
     width: 100%;
     height: 84%;
@@ -91,5 +96,17 @@ export default {
     height: 100%;
     background-image: url(./../../../static/img/6.jpg);
     background-size: 100%;
+}
+.addMind{
+    position: fixed;
+    width: 10%;
+    height: 10%;
+    height: 5%;
+    bottom: 10%;
+    left: 10%;
+    z-index: 40;
+}
+.addMind .icon-add{
+    font-size: 2em;
 }
 </style>
