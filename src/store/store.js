@@ -7,7 +7,9 @@ const state = {
   show: false,
   leftSideShow: false, // 控制左边滑块显示
   ShowTabbar: true, // 控制底部显示隐藏
-  language: 0 // 控制APP语言,默认是中文，value: 0 英语: value: 1
+  language: 0, // 控制APP语言,默认是中文，value: 0 英语: value: 1
+  userID: -1, // 登录app的用户ID
+  toRemenberUser: 0 // 是否记住用户登录
 }
 
 const mutations = {
@@ -28,6 +30,12 @@ const mutations = {
   },
   changeLanguage (state, newLanguage) {
     state.language = newLanguage
+  },
+  remenberUser (state) {
+    state.toRemenberUser = 1
+  },
+  setUserID (state, id) {
+    state.userID = id
   }
 }
 

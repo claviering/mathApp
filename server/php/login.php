@@ -3,6 +3,7 @@
     include 'connectDB.php';
     $obj -> state = '-1';
     $obj -> loginInfo = '-1';
+    $obj -> id = -1;
 
     $conn = connectDB();
     if (!$conn) {
@@ -29,13 +30,14 @@
 
     $userName = $mysqli -> escape_string($userName); //sql过滤
     $userPassword = $mysqli -> escape_string($userPassword);
-    $sql = 'select password from users where name = $userName';
-    $resultPassword = $conn -> query($sql);
-    if ($resultPassword == false) {
+    $sql = 'select password,id from users where name = $userName';
+    $result = $conn -> query($sql);
+    if ($result == false) {
         $obj -> loginInfo = '0'; // 用户不存在
     }
-    if ($resultPassword == $userPassword) {
+    if ($result == $userPassword) {
         $obj -> loginInfo = '2'; // 登录成功
+        $obj -> id = result.id;
     } else {
         $obj -> loginInfo = '1'; // 密码错误
     }

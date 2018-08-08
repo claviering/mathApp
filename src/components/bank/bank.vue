@@ -67,6 +67,24 @@ export default{
     index: function () {
       return this.$store.state.language
     }
+  },
+  created: function () {
+    var id = -1
+    var reader = new FileReader() // 读取保存在文件的用户id
+    reader.onload = function (e) {
+      id = e.target.result // 文件内容
+    }
+    reader.readAsText('mathAppUser') // 读取文件
+    const axios = require('axios')
+    axios.get('/server/php/bank.php', {
+      params: {'id': id}
+    })
+      .then(function (response) {
+        console.log(response.data)
+      })
+      .then(function (error) {
+        console.log(error)
+      })
   }
 }
 </script>

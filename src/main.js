@@ -16,6 +16,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import { Form } from 'bootstrap-vue/es/components'
 import storeConfig from './store/store.js'
+import { saveAs } from 'file-saver/FileSaver'
 import './site.css'
 Vue.use(VueRouter)
 Vue.use(Form)
@@ -44,5 +45,6 @@ new Vue({
   components: { App },
   template: '<App/>',
   router: router1,
-  store: storeConfig
+  store: storeConfig,
+  saveAs: saveAs
 })
