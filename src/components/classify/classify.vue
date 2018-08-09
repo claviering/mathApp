@@ -1,3 +1,5 @@
+<!-- 分类界面 -->
+<!-- nowPage = 2 -->
 <template>
    <div class="classify">
       <el-checkbox-group v-model="checkList">

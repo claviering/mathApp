@@ -1,8 +1,12 @@
+<!-- 添加题目界面 -->
+<!-- nowPage = 1 -->
 <template>
     <div class="addTopic">
         <div class="ques">
             <div class="quesText">{{lang[index].title}}</div>
             <el-input
+              @blur="saveText1"
+              autofocus="focusMe"
               type="textarea"
               :autosize="{ minRows: 5, maxRows: 8}"
               :placeholder="lang[index].pleaseTitle"
@@ -12,6 +16,7 @@
         <div class="point">
             <div class="pointText">{{lang[index].point}}</div>
             <el-input
+              @blur="saveText2"
               type="textarea"
               :autosize="{ minRows: 5, maxRows: 8}"
               :placeholder="lang[index].pleasePoint"
@@ -21,6 +26,7 @@
         <div class="point">
             <div class="pointText">{{lang[index].ans}}</div>
             <el-input
+              @blur="saveText3"
               type="textarea"
               :autosize="{ minRows: 4, maxRows: 6}"
               :placeholder="lang[index].pleaseAns"
@@ -38,12 +44,24 @@ export default{
         {title: 'Title', point: 'Point', ans: 'answer', pleaseTitle: 'Please Input Title', pleasePoint: 'Please Input Point', pleaseAns: 'Please Input Answer'}],
       textarea1: '',
       textarea2: '',
-      textarea3: ''
+      textarea3: '',
+      focusMe: true
     }
   },
   computed: {
     index: function () {
       return this.$store.state.language
+    }
+  },
+  methods: {
+    saveText1: function () {
+      this.$store.commit('saveTitle', this.textarea1)
+    },
+    saveText2: function () {
+      this.$store.commit('savePoint', this.textarea2)
+    },
+    saveText3: function () {
+      this.$store.commit('saveAnswer', this.textarea3)
     }
   }
 }

@@ -9,7 +9,10 @@ const state = {
   ShowTabbar: true, // 控制底部显示隐藏
   language: 0, // 控制APP语言,默认是中文，value: 0 英语: value: 1
   userID: -1, // 登录app的用户ID
-  toRemenberUser: 0 // 是否记住用户登录
+  toRemenberUser: 0, // 是否记住用户登录
+  title: '', // 保存用户输入的题目
+  point: '', // 保存用户输入的提示
+  answer: '' // 保存用户输入的答案
 }
 
 const mutations = {
@@ -36,6 +39,15 @@ const mutations = {
   },
   setUserID (state, id) {
     state.userID = id
+  },
+  saveTitle (state, title) {
+    state.title = title
+  },
+  savePoint (state, point) {
+    state.point = point
+  },
+  saveAnswer (state, answer) {
+    state.answer = answer
   }
 }
 

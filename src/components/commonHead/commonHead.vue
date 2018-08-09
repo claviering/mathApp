@@ -25,7 +25,29 @@ export default{
     'left_icon', 'middle_title', 'right_icon', 'nowSide'
   ],
   methods: {
+    saveTopic: function () {
+      var userID = this.$store.state.userID
+      var title = this.$store.state.title
+      var point = this.$store.state.point
+      var answer = this.$store.state.answer
+      const axios = require('axios')
+      axios.post('', {
+        id: userID,
+        title: title,
+        point: point,
+        answer: answer
+      })
+        .then(function (response) {
+          if (response.data.state === '3') {
+            this.$message.error('添加成功')
+          }
+        })
+        .then(function (error) {
+          this.$message.error(error)
+        })
+    },
     changeHead: function () {
+      this.saveTopic()
       let nPage = this.$store.state.nowPage
       if (nPage === 0) {
         this.$router.push('/addTopic')

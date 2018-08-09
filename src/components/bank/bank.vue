@@ -43,6 +43,8 @@ export default{
   data () {
     return {
       lang: [{point: '知识点'}, {point: 'Point'}],
+      title: '',
+      content: '',
       items: {
         one: '知识点一',
         two: '知识点二',
@@ -69,17 +71,18 @@ export default{
     }
   },
   created: function () {
-    var id = -1
-    var reader = new FileReader() // 读取保存在文件的用户id
-    reader.onload = function (e) {
-      id = e.target.result // 文件内容
-    }
-    reader.readAsText('mathAppUser') // 读取文件
-    const axios = require('axios')
+    var id = 0
+    // TODO
+    // 读取手机的文件，获取ID
+    const axios = require('axios') // 发送请求
     axios.get('/server/php/bank.php', {
       params: {'id': id}
     })
       .then(function (response) {
+        if (response.data.state === '1') {
+          this.title = response.data.title // 获取题目
+          this.content = response.data.point // 获取内容
+        }
         console.log(response.data)
       })
       .then(function (error) {

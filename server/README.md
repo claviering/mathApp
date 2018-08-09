@@ -126,9 +126,9 @@ point 知识点
     "title": "title text",
     "point": "point text",
     "answer": "title answer",
-    "classify1": "classify1 name that same as the colums name",
-    "classify2": "classify2 name that same as the colums name"
-    "classifyn": "classifyn name that same as the colums name",
+    "classify1": "classify1 name that same as the colums name in database",
+    "classify2": "classify2 name that same as the colums name in database"
+    "classifyn": "classifyn name that same as the colums name in database",
 }
 
 JSON返回示例:
