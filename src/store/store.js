@@ -12,7 +12,8 @@ const state = {
   toRemenberUser: 0, // 是否记住用户登录
   title: '', // 保存用户输入的题目
   point: '', // 保存用户输入的提示
-  answer: '' // 保存用户输入的答案
+  answer: '', // 保存用户输入的答案
+  classifies: [] // 保存选择的分类
 }
 
 const mutations = {
@@ -48,6 +49,9 @@ const mutations = {
   },
   saveAnswer (state, answer) {
     state.answer = answer
+  },
+  setClassifies (state, classifies) {
+    this.state.classifies = classifies
   }
 }
 

@@ -106,6 +106,9 @@ export default {
     }
   },
   methods: {
+    showMessage (text = '', type = 'info') {
+      this.$message({message: text, type: type})
+    },
     onSubmitSignIn () {
       var flagName = this.checkName(this.form.name)
       var flagPassword = this.checkPassword(this.form.password)
@@ -119,6 +122,7 @@ export default {
         this.form.password = ''
         return
       }
+      let vueThis = this
       const axios = require('axios')
       axios.post('/server/php/signIn.php', {
         name: this.form.name,
@@ -127,14 +131,14 @@ export default {
         .then(function (response) {
           if (response.data.state === '1') {
             if (response.data.loginInfo === '0') {
-              this.$message.error('用户不存在')
+              vueThis.showMessage('用户不存在', 'error')
             } else if (response.data.loginInfo === '1') {
-              this.$message.error('密码错误')
+              vueThis.showMessage('密码错误', 'error')
             } else if (response.data.loginInfo === '2') {
-              this.$message.error('登录成功')
-              if (this.status) { // 用户选择记得登录
-                this.$store.commit('remenberUser')
-                this.$store.commit('setUserID', response.data.id)
+              vueThis.showMessage('登录成功', 'success')
+              if (vueThis.status) { // 用户选择记得登录
+                vueThis.$store.commit('remenberUser')
+                vueThis.$store.commit('setUserID', response.data.id)
                 // 保存用户id到本地 To save user id to local
                 var FileSaver = require('file-saver')
                 var blob = new Blob([response.data.id], {type: 'text/plain;charset=utf-8'})
@@ -143,9 +147,6 @@ export default {
             }
           }
           console.log(response)
-        })
-        .then(function (error) {
-          console.log(error)
         })
     },
     onSubmitSignUp () {
@@ -172,6 +173,7 @@ export default {
         this.form.password = ''
         return
       }
+      let vueThis = this
       const axios = require('axios')
       axios.post('/server/php/signUp.php', {
         name: this.form.signUpname,
@@ -179,21 +181,19 @@ export default {
         passwordAgain: this.form.signUpPasswordAgain
       })
         .then(function (response) {
-          console.log(response.data)
           if (response.data.state === '1') {
-            if (response.state.signInInfo === '0') {
-              this.$message.error('注册失败')
-            } else if (response.state.signInInfo === '1') {
-              this.$message.error('用户已存在')
-            } else if (response.state.signInInfo === '2') {
-              this.$message.error('注册成功')
-              this.activeName2 = 'first' // 转跳到登录界面
+            if (response.data.signInInfo === '0') {
+              vueThis.showMessage('注册失败', 'error')
+            } else if (response.data.signInInfo === '1') {
+              vueThis.showMessage('用户已存在', 'error')
+            } else if (response.data.signInInfo === '2') {
+              vueThis.showMessage('注册成功', 'success')
+              vueThis.activeName2 = 'first' // 转跳到登录界面
             }
           }
         })
         .then(function (error) {
           console.log(error)
-          this.$message.error(error)
         })
     },
     onReset (evt) {

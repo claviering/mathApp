@@ -1,34 +1,9 @@
 <!-- 题库组件 -->
 <template>
     <div class="bank">
-        <el-collapse v-model="activeNames" @change="handleChange">
-          <el-collapse-item :title="lang[index].point" name="1">
-            <div>可以说我是肥宅，但不可以说我是死肥宅</div>
-            <div>可以说我是肥宅，但不可以说我是死肥宅</div>
-          </el-collapse-item>
-          <el-collapse-item :title="lang[index].point" name="2">
-            <div>可以说我是肥宅，但不可以说我是死肥宅</div>
-            <div>可以说我是肥宅，但不可以说我是死肥宅</div>
-          </el-collapse-item>
-          <el-collapse-item :title="lang[index].point" name="3">
-            <div>可以说我是肥宅，但不可以说我是死肥宅</div>
-            <div>可以说我是肥宅，但不可以说我是死肥宅</div>
-          </el-collapse-item>
-          <el-collapse-item :title="lang[index].point" name="4">
-            <div>可以说我是肥宅，但不可以说我是死肥宅</div>
-            <div>可以说我是肥宅，但不可以说我是死肥宅</div>
-          </el-collapse-item>
-          <el-collapse-item :title="lang[index].point" name="5">
-            <div>可以说我是肥宅，但不可以说我是死肥宅</div>
-            <div>可以说我是肥宅，但不可以说我是死肥宅</div>
-          </el-collapse-item>
-          <el-collapse-item :title="lang[index].point" name="6">
-            <div>可以说我是肥宅，但不可以说我是死肥宅</div>
-            <div>可以说我是肥宅，但不可以说我是死肥宅</div>
-          </el-collapse-item>
-          <el-collapse-item :title="lang[index].point" name="7">
-            <div>可以说我是肥宅，但不可以说我是死肥宅</div>
-            <div>可以说我是肥宅，但不可以说我是死肥宅</div>
+        <el-collapse v-model="activeNames" @change="handleChange" v-for="(value, index) in contents" v-bind:key="index">
+          <el-collapse-item :title="value.title" :name="index">
+            <div>{{value.point}}</div>
           </el-collapse-item>
 
         </el-collapse>
@@ -44,7 +19,7 @@ export default{
     return {
       lang: [{point: '知识点'}, {point: 'Point'}],
       title: '',
-      content: '',
+      contents: [{'title': '空', 'point': '空'}],
       items: {
         one: '知识点一',
         two: '知识点二',
@@ -59,7 +34,8 @@ export default{
       this.$router.push('/detail')
     },
     addKnow: function () {
-      this.$router.push('/addKnow')
+      this.$router.push('/addTopic')
+      this.$store.commit('change', 1)
     },
     handleChange: function () {
       console.log('11')
@@ -74,18 +50,15 @@ export default{
     var id = 0
     // TODO
     // 读取手机的文件，获取ID
+    let vueThis = this
     const axios = require('axios') // 发送请求
     axios.get('/server/php/bank.php', {
       params: {'id': id}
     })
       .then(function (response) {
         if (response.data.state === '1') {
-          console.log(response.content)
+          vueThis.contents = response.data.content
         }
-        console.log(response.data)
-      })
-      .then(function (error) {
-        console.log(error)
       })
   }
 }

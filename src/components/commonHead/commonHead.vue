@@ -25,29 +25,36 @@ export default{
     'left_icon', 'middle_title', 'right_icon', 'nowSide'
   ],
   methods: {
+    showMessage (text = '', type = 'info') {
+      this.$message({message: text, type: type})
+    },
     saveTopic: function () {
       var userID = this.$store.state.userID
       var title = this.$store.state.title
       var point = this.$store.state.point
       var answer = this.$store.state.answer
+      var classifies = this.$store.state.classifies
+      let vueThis = this
       const axios = require('axios')
-      axios.post('', {
+      axios.post('/server/php/addKnow.php', {
         id: userID,
         title: title,
         point: point,
-        answer: answer
+        answer: answer,
+        classify: classifies
       })
         .then(function (response) {
           if (response.data.state === '3') {
-            this.$message.error('添加成功')
+            vueThis.showMessage('添加成功', 'success')
+          } else if (response.data.state === '0') {
+            vueThis.showMessage('添加失败', 'error')
           }
         })
         .then(function (error) {
-          this.$message.error(error)
+          vueThis.showMessage(error, 'error')
         })
     },
     changeHead: function () {
-      this.saveTopic()
       let nPage = this.$store.state.nowPage
       if (nPage === 0) {
         this.$router.push('/addTopic')
@@ -57,6 +64,7 @@ export default{
         this.$router.push('/classify')
         this.$store.commit('change', 2)
       } else if (nPage === 2) {
+        this.saveTopic() // 保存到服务器
         this.$router.push('/bank')
         this.$store.commit('change', 0)
         this.$store.commit('showTabbar')

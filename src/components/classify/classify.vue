@@ -2,7 +2,7 @@
 <!-- nowPage = 2 -->
 <template>
    <div class="classify">
-      <el-checkbox-group v-model="checkList">
+      <el-checkbox-group v-model="checkList[index]" @change="saveClassifies(index)">
         <el-checkbox :label="lang[index].classify1"></el-checkbox>
         <el-checkbox :label="lang[index].classify2"></el-checkbox>
         <el-checkbox :label="lang[index].classify3"></el-checkbox>
@@ -21,12 +21,17 @@ export default{
     return {
       lang: [{classify1: '分类1', classify2: '分类2', classify3: '分类3', classify4: '分类4', classify5: '分类5', classify6: '分类6', classify7: '分类7', classify8: '分类8'},
         {classify1: 'classify1', classify2: 'classify2', classify3: 'classify3', classify4: 'classify4', classify5: 'classify5', classify6: 'classify6', classify7: 'classify7', classify8: 'classify8'}],
-      checkList: ['分类1', 'classify1'] // 返回选中的项
+      checkList: [['分类1'], ['classify1']] // 返回选中的项
     }
   },
   computed: {
     index: function () {
       return this.$store.state.language
+    }
+  },
+  methods: {
+    saveClassifies: function (index) {
+      this.$store.commit('setClassifies', this.checkList[index])
     }
   }
 }

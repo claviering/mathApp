@@ -128,7 +128,7 @@ point 知识点
     "title": "title text",
     "point": "point text",
     "answer": "title answer",
-    "classify": [
+    "classifies": [
       {'1':"classify name"},
       {'2':"classify name"},
       {'3':"classify name"},

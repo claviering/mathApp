@@ -10,7 +10,7 @@
         var $title = '';
         var $point = '';
         var $answer = '';
-        var $classify = array();
+        var $classifies = array();
     }
     $ResponseObj = new Response;
     $getInfo = new GetInfo;
@@ -33,7 +33,7 @@
         $getInfo -> title = $phpObj->{'title'};
         $getInfo -> point = $phpObj->{'point'};
         $getInfo -> answern = $phpObj -> {'answer'};
-        $getInfo -> classify = $phpObj -> {'classify'};
+        $getInfo -> classifies = $phpObj -> {'classifies'};
     }
     else{
         $obj -> $state = '0'; // POST失败

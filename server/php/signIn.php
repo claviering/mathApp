@@ -6,7 +6,17 @@
         var $loginInfo = '-1'; // 登录状态
         var $id = '-1'; // 用户登录成功后的ID
     }
+    class DateBaseInfo{
+        var $id = '';
+        var $password = '';
+    }
+    class Client{
+        var $name = '';
+        var $password = '';
+    }
     $userObj = new User;
+    $DBInfo = new DateBaseInfo;
+    $ClientInfo = new Client;
 
     $conn = connectDB();
     if (!$conn) {
@@ -15,22 +25,20 @@
         die();
     }
 
-    $userName = '';
-    $userPassword = '';
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
         $userObj -> state = '1';
         $res = file_get_contents("php://input"); //获取axios post json格式的数据
         $phpObj = json_decode($res);
-        $userName = $phpObj->{'name'};
-        $userPassword = $phpObj->{'password'};
+        $ClientInfo -> name = $phpObj->{'name'};
+        $ClientInfo -> password = $phpObj->{'password'};
     }
     else{
         $userObj -> state = '0';
     }
     // TODO
     // SQL注入过滤
-    $sql = 'select password,id from users where name = ' . '"'. $userName . '"';
+    $sql = 'select password,id from users where name = ' . '"'. $ClientInfo -> name . '"';
     $res = $conn -> query($sql);
     if (!$res) // 查询不到数据，用户不存在
     {
@@ -39,16 +47,16 @@
     }
     if ($res -> num_rows > 0) {
         while ($row = $res -> fetch_assoc()) {
-            $passwdInDB = $row['password'];
-            $userIDInDB = $row['id'];
+            $DBInfo -> password = $row['password'];
+            $DBInfo -> id = $row['id'];
         }
     }
-    if ($userIDInDB == '') {
+    if ($DBInfo -> id == '') {
         $userObj -> loginInfo = '0'; // 用户不存在
     }
-    if ($passwdInDB == $userPassword) {
+    if ($DBInfo -> password == $ClientInfo -> password) {
         $userObj -> loginInfo = '2'; // 登录成功
-        $userObj -> id = $userIDInDB;
+        $userObj -> id = $DBInfo -> id;
     } else {
         $userObj -> loginInfo = '1'; // 密码错误
     }
