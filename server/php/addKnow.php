@@ -1,58 +1,73 @@
 <?php
 // 添加题目,分类处理
     include 'connectDB.php';
-    $obj -> $id = '-1';
-    $obj -> $title = '-1';
+    class Response{
+        var $state = '-1';
+    }
+
+    class GetInfo{
+        var $id = '-1';
+        var $title = '';
+        var $point = '';
+        var $answer = '';
+        var $classify = array();
+    }
+    $ResponseObj = new Response;
+    $getInfo = new GetInfo;
 
     $conn = connectDB();
     if (!$conn) {
-        $obj -> $state = 2; //数据库连接失败
-        echo json_encode($obj);
+        $ResponseObj -> state = '2'; //数据库连接失败
+        echo json_encode($ResponseObj);
         die();
     }
 
     
-    $id = '';
-    $title = '';
-    $point = '';
-    $answer = '';
-    $classify = '';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
-        $obj -> $state = '1'; // POST请求成功
-        $res = file_get_contents("php://input"); //获取axios post json格式的数据
-        $phpObj = json_decode($res);
-        $userID = $phpObj->{'id'};
-        $userTitle = $phpObj->{'title'};
-        $userPoint = $phpObj->{'point'};
-        $userAnswern = $phpObj -> {'answer'};
-        $userClassify = $phpObj -> {'classify'};
+        $ResponseObj -> state = '1'; // POST请求成功
+        $getRes = file_get_contents("php://input"); //获取axios post json格式的数据
+        $phpObj = json_decode($getRes);
+        $getInfo -> id = $phpObj->{'id'};
+        $getInfo -> title = $phpObj->{'title'};
+        $getInfo -> point = $phpObj->{'point'};
+        $getInfo -> answern = $phpObj -> {'answer'};
+        $getInfo -> classify = $phpObj -> {'classify'};
     }
     else{
         $obj -> $state = '0'; // POST失败
+        die();
     }
 
-    $userID = $mysqli -> escape_string($userID); //sql过滤
-
+    // TODO
+    //SQL注入检测
+    // 获取数据库最大的知识点id
+    $maxID = 0;
     $maxKnowIDsql = 'select knowID from know where knowID=(select max(knowID) from know)';
     $maxKnowID = $conn -> query($maxKnowIDsql);
-    $knowID = $maxKnowID + 1;
+    if (maxKnowID -> num_rows > 0) {
+        while($row = $maxKnowID -> fetch_assoc()) {
+            $maxID = $row['knowID'];
+        }
+    }   
+    $knowID = $maxID + 1;
 
-
-    $insertKnowsql = 'insert into know (title, point, answer, userID, knowID) values ($userTitle, $userTitle, $userAnswern, $userID, $knowID)';
+    // 数据插入
+    $insertKnowsql = 'insert into know (title, point, answer, userID, knowID) values ('.'"'.$userTitle.'","'.$userTitle.'","' .$userAnswern.'","' .$userID.'","' .$knowID.'")';
+    echo $insertKnowsql;
 
     if ($conn -> query($insertKnowsql) == true) {
-        $obj -> $state = '3'; // 添加知识点成功
+        $ResponseObj -> $state = '3'; // 添加知识点成功
     } else {
-        $obj -> $state = '0'; // 添加知识点失败
+        $ResponseObj -> $state = '0'; // 添加知识点失败
     }
 
 
     // TO DO
     // 分类的数据库添加暂时不做
 
-    echo json_encode($obj); // 返回json格式
+    echo json_encode($ResponseObj); // 返回json格式
 
 
     $conn -> close();

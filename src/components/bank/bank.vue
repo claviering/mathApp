@@ -80,8 +80,7 @@ export default{
     })
       .then(function (response) {
         if (response.data.state === '1') {
-          this.title = response.data.title // 获取题目
-          this.content = response.data.point // 获取内容
+          console.log(response.content)
         }
         console.log(response.data)
       })

@@ -1,57 +1,68 @@
 <?php
 // 注册处理
     include 'connectDB.php';
-    $obj -> state = '-1';
-    $obj -> signInInfo = '-1';
+    class SignUpInforn{
+        var $name = '';
+        var $password = '';
+        var $passwordAgain = '';
+    }
+    class Response{
+        var $state = '-1';
+        var $signInInfo = '-1';
+    }
+
+    $signObj = new SignUpInforn;
+    $responseObj = new Response;
 
     $conn = connectDB();
     if (!$conn) {
-        $obj -> state = 2; //数据库连接失败
-        echo json_encode($obj);
+        $responseObj -> state = '2'; //数据库连接失败
+        echo json_encode($responseObj);
         die();
     }
 
-    
-    $userName = '';
-    $userPassword = '';
-    $userPasswordAgain = '';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
-        $obj -> state = '1'; // POST请求成功
+        $responseObj -> state = '1'; // POST请求成功
         $res = file_get_contents("php://input"); //获取axios post json格式的数据
         $phpObj = json_decode($res);
-        $userName = $phpObj->{'name'};
-        $userPassword = $phpObj->{'password'};
-        $userPasswordAgain = $phpObj -> {'userPasswordAgain'};
+        $signObj -> name = $phpObj->{'name'};
+        $signObj -> password = $phpObj->{'password'};
+        $signObj -> passwordAgain = $phpObj -> {'passwordAgain'};
     }
     else{
-        $obj -> state = '0'; // POST失败
+        $responseObj -> state = '0'; // POST失败
     }
 
-    $userName = $mysqli -> escape_string($userName); //sql过滤
-    $userPassword = $mysqli -> escape_string($userPassword);
-    $userPasswordAgain = $mysqli -> escape_string($userPasswordAgain);
-    $findUserIDsql = 'select id from users where name = $userName';
-    $userID = $conn -> query($findUserIDsql);
-    if ($userID > -1) {
-        $obj -> signInInfo = '1'; // 用户已经存在
-        echo json_encode($obj);
+    // TODO
+    // SQL注入过滤
+    $findUserIDsql = 'select id from users where name = '. '"' . $signObj -> name . '"';
+    $res = $conn -> query($findUserIDsql);
+    if (!$res) { // 用户已经存在
+        $responseObj -> signInInfo = '1';
+        echo json_encode($responseObj);
         die();
     }
 
+    $max = -1;
     $maxIDsql = 'select id from users where id=(select max(id) from users)';
     $maxID = $conn -> query($maxIDsql);
-    $userID = $maxID + 1;
-    $signInUsersql = 'insert into users (id, name, password) values ($userID, $userName, $userPassword)';
+    if ($maxID -> num_rows > 0) {
+        while ($row = $maxID -> fetch_assoc()) {
+            $max = $row['id'];
+        }
+    }
+    $userID = $max + 1; //新用户id
+    $signInUsersql = 'insert into users (id, name, password) values (' . $userID . ',' .'"'. $signObj -> name.'"' .',' .'"'. $signObj -> password.'"' . ')';
 
     if ($conn -> query($signInUsersql) == true) {
-        $obj -> $signInInfo = '2'; // 注册成功
+        $responseObj -> signInInfo = '2'; // 注册成功
     } else {
-        $obj -> $signInInfo = '0'; // 注册成功
+        $responseObj -> signInInfo = '0'; // 注册失败
     }
 
-    echo json_encode($obj); // 返回json格式
+    echo json_encode($responseObj); // 返回json格式
 
 
     $conn -> close();

@@ -3,13 +3,14 @@
     include 'connectDB.php';
     class Foo{
         var $state = '-1';
-        var $title = '-1';
-        var $point = '-1';
+        var $content = array();
+    }
+    class Content{
+        var $title = '';
+        var $point = '';
     }
     $obj = new Foo;
-    $obj -> state = '-1';
-    $obj -> title = '-1';
-    $obj -> point = '-1';
+    $cont = new Content;
 
     $conn = connectDB();
     if (!$conn) {
@@ -27,11 +28,12 @@
         $obj -> state = '0'; // GET失败
     }
     $findUserIDsql = 'select title, point from know where userID = ' . $userID;
-    echo $findUserIDsql;
     $res = $conn -> query($findUserIDsql);
     if ($res -> num_rows > 0) {
         while ($row = $res -> fetch_assoc()) {
-            echo "title:" . $row["title"] . "point:" . $row["point"];
+            $cont -> title = $row['title'];
+            $cont -> point = $row['point'];
+            array_push($obj->content, $cont);
         }
     }
     echo json_encode($obj);

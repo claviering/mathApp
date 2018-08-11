@@ -12,7 +12,7 @@
 
 ## 登录请求
 
-接口地址: /server/php/login.php
+接口地址: /server/php/signIn.php
 
 返回格式: JSON
 
@@ -46,7 +46,7 @@ id  用户登录成功后的id
 
 ## 注册请求
 
-接口地址: /server/php/signIn.php
+接口地址: /server/php/signUp.php
 
 返回格式: JSON
 
@@ -97,8 +97,10 @@ JSON返回示例:
 
 {
     "state": "0"
-    "title": "title text",
-    "point": "point text"
+    "content":[
+       {"title": "title text", "point": "point text"},
+       {"title": "title text", "point": "point text"}
+     ] 
 }
 
 参数说明
@@ -126,9 +128,16 @@ point 知识点
     "title": "title text",
     "point": "point text",
     "answer": "title answer",
-    "classify1": "classify1 name that same as the colums name in database",
-    "classify2": "classify2 name that same as the colums name in database"
-    "classifyn": "classifyn name that same as the colums name in database",
+    "classify": [
+      {'1':"classify name"},
+      {'2':"classify name"},
+      {'3':"classify name"},
+      {'4':"classify name"},
+      {'5':"classify name"},
+      {'6':"classify name"},
+      {'7':"classify name"},
+      {'8':"classify name"},
+    ]
 }
 
 JSON返回示例:

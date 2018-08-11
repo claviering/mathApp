@@ -120,7 +120,7 @@ export default {
         return
       }
       const axios = require('axios')
-      axios.post('/server/php/login.php', {
+      axios.post('/server/php/signIn.php', {
         name: this.form.name,
         password: this.form.password
       })
@@ -173,19 +173,19 @@ export default {
         return
       }
       const axios = require('axios')
-      axios.post('/server/php/login.php', {
-        name: this.form.name,
+      axios.post('/server/php/signUp.php', {
+        name: this.form.signUpname,
         password: this.form.signUpPassword,
         passwordAgain: this.form.signUpPasswordAgain
       })
         .then(function (response) {
           console.log(response.data)
-          if (this.response.data.state === '1') {
-            if (this.response.state.signInInfo === '0') {
+          if (response.data.state === '1') {
+            if (response.state.signInInfo === '0') {
               this.$message.error('注册失败')
-            } else if (this.response.state.signInInfo === '1') {
+            } else if (response.state.signInInfo === '1') {
               this.$message.error('用户已存在')
-            } else if (this.response.state.signInInfo === '2') {
+            } else if (response.state.signInInfo === '2') {
               this.$message.error('注册成功')
               this.activeName2 = 'first' // 转跳到登录界面
             }
