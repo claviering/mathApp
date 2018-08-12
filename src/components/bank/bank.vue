@@ -41,7 +41,9 @@ export default{
       var id = localStorage.getItem('token') || this.$store.state.userID
       let vueThis = this
       const axios = require('axios') // 发送请求
-      axios.get('/server/php/bank.php', {
+      // let host = this.$store.state.host
+      let url = '/server/php/bank.php'
+      axios.get(url, {
         params: {'id': id}
       })
         .then(function (response) {

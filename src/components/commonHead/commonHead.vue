@@ -36,7 +36,8 @@ export default{
       var classifies = this.$store.state.classifies
       let vueThis = this
       const axios = require('axios')
-      axios.post('/server/php/addKnow.php', {
+      let url = '/server/php/addKnow.php'
+      axios.post(url, {
         id: userID,
         title: title,
         point: point,

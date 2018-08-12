@@ -124,7 +124,9 @@ export default {
       }
       let vueThis = this
       const axios = require('axios')
-      axios.post('/server/php/signIn.php', {
+      // let host = this.$store.state.host
+      let url = '/server/php/signIn.php'
+      axios.post(url, {
         name: this.form.name,
         password: this.form.password
       })
@@ -172,7 +174,9 @@ export default {
       }
       let vueThis = this
       const axios = require('axios')
-      axios.post('/server/php/signUp.php', {
+      // let host = this.$store.state.host
+      let url = '/server/php/signUp.php'
+      axios.post(url, {
         name: this.form.signUpname,
         password: this.form.signUpPassword,
         passwordAgain: this.form.signUpPasswordAgain

@@ -10,7 +10,7 @@
         var $title = '';
         var $point = '';
         var $answer = '';
-        var $classifies = array();
+        var $classifies = [];
     }
     $ResponseObj = new Response;
     $getInfo = new GetInfo;
@@ -36,7 +36,7 @@
         $getInfo -> classifies = $phpObj -> {'classify'};
     }
     else{
-        $obj -> $state = '0'; // POST失败
+        $ResponseObj -> state = '0'; // POST失败
         die();
     }
 
@@ -56,22 +56,21 @@
     $stmt -> bind_param('sssdd', $getInfo -> title, $getInfo -> point, $getInfo -> answern, $getInfo -> id, $knowID);
     $stmt -> execute();
     $res = $stmt -> get_result();
-    if (!$res) {
+
+    // 分类的添加
+    $c = $getInfo -> classifies;
+    foreach ($c as $cc) {
+        echo $cc;
+    }
+    $classifyStmt = $conn -> prepare('insert into classify (classify0, classify1, classify2, classify3, classify4, classify5, classify6, classify7, knowID) values (?,?,?,?,?,?,?,?,?)');
+    $classifyStmt -> bind_param('ssssssssd', $c[0],  $c[1], $c[2], $c[3], $c[4], $c[5], $c[6], $c[7], $knowID);
+    $classifyStmt -> execute();
+    $classifyRes = $classifyStmt -> get_result();
+    if (!$res && !$classifyRes) {
         $ResponseObj -> state = '3'; // 添加知识点成功
     } else {
         $ResponseObj -> state = '0'; // 添加知识点失败
     }
-    // $insertKnowsql = 'insert into know (title, point, answer, userID, knowID) values ('.'"'.$userTitle.'","'.$userTitle.'","' .$userAnswern.'","' .$userID.'","' .$knowID.'")';
-    // echo $insertKnowsql;
-    // if ($conn -> query($insertKnowsql) == true) {
-    //     $ResponseObj -> $state = '3'; // 添加知识点成功
-    // } else {
-    //     $ResponseObj -> $state = '0'; // 添加知识点失败
-    // }
-
-
-    // TO DO
-    // 分类的数据库添加暂时不做
 
     echo json_encode($ResponseObj); // 返回json格式
 

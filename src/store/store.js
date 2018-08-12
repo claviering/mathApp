@@ -14,7 +14,8 @@ const state = {
   point: '', // 保存用户输入的提示
   answer: '', // 保存用户输入的答案
   classifies: [], // 保存选择的分类
-  flagAddKnow: false // 标记是否成功添加知识点
+  flagAddKnow: false, // 标记是否成功添加知识点
+  host: '127.0.0.1' // 服务器地址
 }
 
 const mutations = {

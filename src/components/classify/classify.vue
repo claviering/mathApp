@@ -19,9 +19,9 @@
 export default{
   data () {
     return {
-      lang: [{classify1: '分类1', classify2: '分类2', classify3: '分类3', classify4: '分类4', classify5: '分类5', classify6: '分类6', classify7: '分类7', classify8: '分类8'},
-        {classify1: 'classify1', classify2: 'classify2', classify3: 'classify3', classify4: 'classify4', classify5: 'classify5', classify6: 'classify6', classify7: 'classify7', classify8: 'classify8'}],
-      checkList: [['分类1'], ['classify1']] // 返回选中的项
+      lang: [{classify1: '代数', classify2: '几何', classify3: '分析', classify4: '概率', classify5: '离散', classify6: '计算', classify7: '集合', classify8: '微积分'},
+        {classify1: 'Algebra', classify2: 'Geometry', classify3: 'Analysis', classify4: 'Probability', classify5: 'Discrete', classify6: 'Calculation', classify7: 'Set', classify8: 'Calculus'}],
+      checkList: [[], []] // 返回选中的项
     }
   },
   computed: {
@@ -39,16 +39,20 @@ export default{
 
 <style scoped>
 .classify{
-    width: 80%;
+    width: 100%;
     height: 84%;
-    padding-left: 10%;
     display: flex;
-    flex-wrap: wrap;
+    justify-content: center;
 }
 .el-checkbox-group{
     padding-top: 20%;
+    width: 80%;
+    height: 100%;
+    background-color: rgba(235,235,235,0.9);
+    display: flex;
+    flex-direction: column;
 }
 .el-checkbox{
-    margin-left: 12%;
+  margin-left: 30px;
 }
 </style>
