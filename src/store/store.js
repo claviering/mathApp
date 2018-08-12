@@ -13,7 +13,8 @@ const state = {
   title: '', // 保存用户输入的题目
   point: '', // 保存用户输入的提示
   answer: '', // 保存用户输入的答案
-  classifies: [] // 保存选择的分类
+  classifies: [], // 保存选择的分类
+  flagAddKnow: false // 标记是否成功添加知识点
 }
 
 const mutations = {
@@ -52,6 +53,9 @@ const mutations = {
   },
   setClassifies (state, classifies) {
     this.state.classifies = classifies
+  },
+  changeFlagAddKnow (state, flag) {
+    state.flagAddKnow = flag
   }
 }
 

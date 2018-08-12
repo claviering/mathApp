@@ -136,13 +136,10 @@ export default {
               vueThis.showMessage('密码错误', 'error')
             } else if (response.data.loginInfo === '2') {
               vueThis.showMessage('登录成功', 'success')
+              vueThis.$store.commit('setUserID', response.data.id)
               if (vueThis.status) { // 用户选择记得登录
                 vueThis.$store.commit('remenberUser')
-                vueThis.$store.commit('setUserID', response.data.id)
-                // 保存用户id到本地 To save user id to local
-                var FileSaver = require('file-saver')
-                var blob = new Blob([response.data.id], {type: 'text/plain;charset=utf-8'})
-                FileSaver.saveAs(blob, 'mathAppUser') // 文件名mathAppUser
+                localStorage.setItem('token', response.data.id) // 保存用户id
               }
             }
           }

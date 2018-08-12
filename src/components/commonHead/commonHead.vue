@@ -25,7 +25,7 @@ export default{
     'left_icon', 'middle_title', 'right_icon', 'nowSide'
   ],
   methods: {
-    showMessage (text = '', type = 'info') {
+    showMessage (vueThis, text = '', type = 'info') {
       this.$message({message: text, type: type})
     },
     saveTopic: function () {
@@ -45,13 +45,12 @@ export default{
       })
         .then(function (response) {
           if (response.data.state === '3') {
-            vueThis.showMessage('添加成功', 'success')
+            vueThis.showMessage(vueThis, '添加成功', 'success')
+            vueThis.$store.commit('changeFlagAddKnow', true)
           } else if (response.data.state === '0') {
-            vueThis.showMessage('添加失败', 'error')
+            vueThis.showMessage(vueThis, '添加失败', 'error')
+            vueThis.$store.commit('changeFlagAddKnow', false)
           }
-        })
-        .then(function (error) {
-          vueThis.showMessage(error, 'error')
         })
     },
     changeHead: function () {

@@ -36,23 +36,23 @@
     else{
         $userObj -> state = '0';
     }
-    // TODO
-    // SQL注入过滤
-    $sql = 'select password,id from users where name = ' . '"'. $ClientInfo -> name . '"';
-    $res = $conn -> query($sql);
-    if (!$res) // 查询不到数据，用户不存在
+    
+    $stmt = $conn -> prepare('select password,id from users where name = ?');
+    $stmt -> bind_param('s', $ClientInfo -> name);
+    $stmt -> execute();
+    $res = $stmt -> get_result();
+    // $sql = 'select password,id from users where name = ' . '"'. $ClientInfo -> name . '"';
+    // $res = $conn -> query($sql);
+    if ($res -> num_rows < 1) // 查询不到数据，用户不存在
     {
         $userObj -> loginInfo = '0'; // 用户不存在
+        echo json_encode($userObj); // 返回json格式
         die();
-    }
-    if ($res -> num_rows > 0) {
+    } else if ($res -> num_rows > 0) {
         while ($row = $res -> fetch_assoc()) {
             $DBInfo -> password = $row['password'];
             $DBInfo -> id = $row['id'];
         }
-    }
-    if ($DBInfo -> id == '') {
-        $userObj -> loginInfo = '0'; // 用户不存在
     }
     if ($DBInfo -> password == $ClientInfo -> password) {
         $userObj -> loginInfo = '2'; // 登录成功
@@ -61,6 +61,6 @@
         $userObj -> loginInfo = '1'; // 密码错误
     }
     echo json_encode($userObj); // 返回json格式
-
+    $stmt -> close();
     $conn -> close();
 ?>

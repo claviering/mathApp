@@ -27,8 +27,11 @@
     else{
         $obj -> state = '0'; // GET失败
     }
-    $findUserIDsql = 'select title, point from know where userID = ' . $userID;
-    $res = $conn -> query($findUserIDsql);
+
+    $stmt = $conn -> prepare('select title, point from know where userID = ?');
+    $stmt -> bind_param('d', $userID);
+    $stmt -> execute();
+    $res = $stmt -> get_result();
     if ($res -> num_rows > 0) {
         while ($row = $res -> fetch_assoc()) {
             $cont -> title = $row['title'];
@@ -36,7 +39,20 @@
             array_push($obj->content, $cont);
         }
     }
+
+    // $findUserIDsql = 'select title, point from know where userID = ' . $userID;
+    // $res = $conn -> query($findUserIDsql);
+    // if ($res -> num_rows > 0) {
+    //     while ($row = $res -> fetch_assoc()) {
+    //         $cont -> title = $row['title'];
+    //         $cont -> point = $row['point'];
+    //         array_push($obj->content, $cont);
+    //     }
+    // }
+
+
     echo json_encode($obj);
+    $stmt -> close();
     $conn -> close();
 
 ?>

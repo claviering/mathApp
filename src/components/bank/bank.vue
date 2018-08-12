@@ -5,7 +5,6 @@
           <el-collapse-item :title="value.title" :name="index">
             <div>{{value.point}}</div>
           </el-collapse-item>
-
         </el-collapse>
         <div class="bank_add" v-on:click="addKnow">
             <span class="icon-add"></span>
@@ -28,7 +27,29 @@ export default{
       activeNames: 'active'
     }
   },
+  watch: {
+    '$route': 'updateBank' // 路由有变化的时候执行
+  },
   methods: {
+    updateBank: function () {
+      if (this.$store.state.flagAddKnow) {
+        this.getMyBank()
+        this.$store.commit('changeFlagAddKnow', false)
+      }
+    },
+    getMyBank: function () {
+      var id = localStorage.getItem('token') || this.$store.state.userID
+      let vueThis = this
+      const axios = require('axios') // 发送请求
+      axios.get('/server/php/bank.php', {
+        params: {'id': id}
+      })
+        .then(function (response) {
+          if (response.data.state === '1') {
+            vueThis.contents = response.data.content
+          }
+        })
+    },
     changeToliHead: function () {
       this.$store.commit('change', 3)
       this.$router.push('/detail')
@@ -38,7 +59,7 @@ export default{
       this.$store.commit('change', 1)
     },
     handleChange: function () {
-      console.log('11')
+      console.log('0')
     }
   },
   computed: {
@@ -47,19 +68,7 @@ export default{
     }
   },
   created: function () {
-    var id = 0
-    // TODO
-    // 读取手机的文件，获取ID
-    let vueThis = this
-    const axios = require('axios') // 发送请求
-    axios.get('/server/php/bank.php', {
-      params: {'id': id}
-    })
-      .then(function (response) {
-        if (response.data.state === '1') {
-          vueThis.contents = response.data.content
-        }
-      })
+    this.getMyBank()
   }
 }
 </script>
