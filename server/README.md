@@ -129,6 +129,7 @@ point 知识点
     "point": "point text",
     "answer": "title answer",
     "classify": [
+      {'0':"classify name"},
       {'1':"classify name"},
       {'2':"classify name"},
       {'3':"classify name"},
@@ -136,7 +137,6 @@ point 知识点
       {'5':"classify name"},
       {'6':"classify name"},
       {'7':"classify name"},
-      {'8':"classify name"},
     ]
 }
 

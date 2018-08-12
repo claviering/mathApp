@@ -10,7 +10,7 @@
         var $title = '';
         var $point = '';
         var $answer = '';
-        var $classifies = [];
+        var $classifies = array();
     }
     $ResponseObj = new Response;
     $getInfo = new GetInfo;
@@ -59,11 +59,11 @@
 
     // 分类的添加
     $c = $getInfo -> classifies;
-    foreach ($c as $cc) {
-        echo $cc;
+    for ($i = 0; $i < 8; $i++) { // 填充数组，数据库不允许有null
+        array_push($c, '-1');
     }
-    $classifyStmt = $conn -> prepare('insert into classify (classify0, classify1, classify2, classify3, classify4, classify5, classify6, classify7, knowID) values (?,?,?,?,?,?,?,?,?)');
-    $classifyStmt -> bind_param('ssssssssd', $c[0],  $c[1], $c[2], $c[3], $c[4], $c[5], $c[6], $c[7], $knowID);
+    $classifyStmt = $conn -> prepare("insert into classify (classify0, classify1, classify2, classify3, classify4, classify5, classify6, classify7, knowID) values (?,?,?,?,?,?,?,?,?)");
+    $classifyStmt -> bind_param('ssssssssi', $c['0'],  $c['1'], $c['2'], $c['3'], $c['4'], $c['5'], $c['6'], $c['7'], $knowID);
     $classifyStmt -> execute();
     $classifyRes = $classifyStmt -> get_result();
     if (!$res && !$classifyRes) {
@@ -77,4 +77,4 @@
     $stmt -> close();
     $conn -> close();
 
-?>
+?>  

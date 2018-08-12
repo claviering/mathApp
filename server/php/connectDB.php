@@ -12,6 +12,5 @@ function connectDB(){
         die();
     }
     return $conn;
-
 }
 ?>
