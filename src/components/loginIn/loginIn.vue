@@ -125,10 +125,12 @@ export default {
       let vueThis = this
       const axios = require('axios')
       // let host = this.$store.state.host
+      var hash = require('hash.js')
+      var hashPassword = hash.sha256().update(this.form.password).digest('hex')
       let url = '/server/php/signIn.php'
       axios.post(url, {
         name: this.form.name,
-        password: this.form.password
+        password: hashPassword
       })
         .then(function (response) {
           if (response.data.state === '1') {
@@ -175,11 +177,13 @@ export default {
       let vueThis = this
       const axios = require('axios')
       // let host = this.$store.state.host
+      var hash = require('hash.js')
+      var hashPassword = hash.sha256().update(this.form.SignInPassword).digest('hex')
       let url = '/server/php/signUp.php'
       axios.post(url, {
         name: this.form.signUpname,
-        password: this.form.signUpPassword,
-        passwordAgain: this.form.signUpPasswordAgain
+        password: hashPassword,
+        passwordAgain: hashPassword
       })
         .then(function (response) {
           if (response.data.state === '1') {

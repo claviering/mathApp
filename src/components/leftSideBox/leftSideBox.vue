@@ -5,9 +5,11 @@
                 <img src="../../../static/img/th.jpg">
             </div>
             <div class="leftSideInfo">
-               <p v-on:click="loginIn">{{lang[index].login}}</p>
+              <span class="icon-login"></span>
+              <p v-on:click="loginIn">{{lang[index].login}}</p>
             </div>
             <div class="leftSetting" v-on:click="goSetting">
+              <span class="el-icon-setting"></span>
               <p id="setting">{{lang[index].setting}}</p>
             </div>
         </div>
@@ -46,6 +48,7 @@ export default{
 </script>
 
 <style scoped lang="css">
+@import 'login/style.css';
 .leftSideBox{
     height: 84%;
     width: 40%;
@@ -65,26 +68,34 @@ export default{
     height: 130px;
 }
 .leftSideInfo{
-    text-align: center;
     border-bottom-width: 1px;
     border-bottom-style: solid;
 }
+.leftSideInfo .icon-login{
+  padding-left: 30px;
+}
 .leftSideInfo p{
     color: white;
+    float: right;
+    padding-right: 50px;
     margin-top: 0px;
     margin-bottom: 0px;
 }
 .leftSetting{
   position: relative;
   bottom: -60%;
-  display: flex;
-  justify-content: center;
+}
+.leftSetting .el-icon-setting{
+  padding-left: 30px;
+  color: white;
 }
 .leftSetting > p{
-  margin: 0px;
+    margin: 0px;
     color: white;
     margin-top: 0px;
     margin-bottom: 0px;
+    float: right;
+    padding-right: 50px;
 }
 .goRight-enter, .goRight-leave-to{
     left: -40%;

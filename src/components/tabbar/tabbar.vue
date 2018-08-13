@@ -1,12 +1,15 @@
 <template>
     <div id="tabbar" v-on:click="clickTabbar">
         <router-link to="/bank" tag="div" class="box">
+            <span class="el-icon-document"></span>
             <div>{{lang[index].my_bank}}</div>
         </router-link>
         <router-link to="/addKnow" tag="div" class="box">
+            <span class="el-icon-edit"></span>
             <div>{{lang[index].mind_map}}</div>
         </router-link>
         <router-link to="/develop" tag="div" class="box">
+            <span class="el-icon-search"></span>
             <div>{{lang[index].develop}}</div>
         </router-link>
     </div>

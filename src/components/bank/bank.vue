@@ -18,7 +18,7 @@ export default{
     return {
       lang: [{point: '知识点'}, {point: 'Point'}],
       title: '',
-      contents: [{'title': '空', 'point': '空'}],
+      contents: [{'title': '登录/SignIn', 'point': '登录/SignIn'}],
       items: {
         one: '知识点一',
         two: '知识点二',
