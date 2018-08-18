@@ -5,6 +5,7 @@
         var $state = '-1'; // 状态
         var $loginInfo = '-1'; // 登录状态
         var $id = '-1'; // 用户登录成功后的ID
+        var $icourl = '';
     }
     class DateBaseInfo{
         var $id = '';
@@ -41,8 +42,6 @@
     $stmt -> bind_param('s', $ClientInfo -> name);
     $stmt -> execute();
     $res = $stmt -> get_result();
-    // $sql = 'select password,id from users where name = ' . '"'. $ClientInfo -> name . '"';
-    // $res = $conn -> query($sql);
     if ($res -> num_rows < 1) // 查询不到数据，用户不存在
     {
         $userObj -> loginInfo = '0'; // 用户不存在
@@ -57,6 +56,7 @@
     if ($DBInfo -> password == $ClientInfo -> password) {
         $userObj -> loginInfo = '2'; // 登录成功
         $userObj -> id = $DBInfo -> id;
+        $userObj -> icourl = 'static/img/' . $userObj -> id . '.ico';
     } else {
         $userObj -> loginInfo = '1'; // 密码错误
     }

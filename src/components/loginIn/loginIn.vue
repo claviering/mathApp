@@ -2,7 +2,8 @@
 <!-- TODO 用户密码加密传输 -->
 <template>
   <div class="loginIn">
-      <el-tabs v-model="activeName2" type="card">
+      <div class="isSignInNow" v-if="(isSignIn > -1)">登录成功</div>
+      <el-tabs v-model="activeName2" type="card" v-if="!(isSignIn > -1)">
         <el-tab-pane :label="lang[index].signIn" name="first">
             <b-form @submit="onSubmitSignIn" @reset="onReset" v-if="show">
               <b-form-group id="exampleInputGroup2"
@@ -141,10 +142,12 @@ export default {
             } else if (response.data.loginInfo === '2') {
               vueThis.showMessage('登录成功', 'success')
               vueThis.$store.commit('setUserID', response.data.id)
+              vueThis.$store.commit('setusericourl', response.data.icourl)
               if (vueThis.status) { // 用户选择记得登录
                 vueThis.$store.commit('remenberUser')
                 localStorage.setItem('token', response.data.id) // 保存用户id
               }
+              vueThis.$router.push('/bank')
             }
           }
           console.log(response)
@@ -228,6 +231,9 @@ export default {
   computed: {
     index: function () {
       return this.$store.state.language
+    },
+    isSignIn: function () {
+      return this.$store.state.userID
     }
   }
 }

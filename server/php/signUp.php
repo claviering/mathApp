@@ -5,6 +5,7 @@
         var $name = '';
         var $password = '';
         var $passwordAgain = '';
+        var $icourl = '';
     }
     class Response{
         var $state = '-1';
@@ -20,7 +21,6 @@
         echo json_encode($responseObj);
         die();
     }
-
 
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
@@ -40,8 +40,6 @@
     $stmt -> bind_param('s', $signObj -> name);
     $stmt -> execute();
     $res = $stmt -> get_result();
-    // $findUserIDsql = 'select id from users where name = '. '"' . $signObj -> name . '"';
-    // $res = $conn -> query($findUserIDsql);
     if ($res -> num_rows > 0) { // 用户已经存在
         $responseObj -> signInInfo = '1';
         echo json_encode($responseObj);
@@ -57,8 +55,9 @@
         }
     }
     $userID = $max + 1; //新用户id
-    $signInUsersql = $conn -> prepare("insert into users (id, name, password) values (?,?,?)");
-    $signInUsersql -> bind_param('dss', $userID, $signObj -> name,  $signObj -> password);  
+    $signObj -> icourl = 'static/img/' . $userID . '.ico';
+    $signInUsersql = $conn -> prepare("insert into users (id, name, password, icourl) values (?,?,?,?)");
+    $signInUsersql -> bind_param('dsss', $userID, $signObj -> name,  $signObj -> password, $signObj -> icourl);
     $signInUsersql -> execute();
     $res = $signInUsersql -> get_result();
     if (!$res) {
@@ -67,15 +66,6 @@
         $responseObj -> signInInfo = '0'; // 注册失败
     }
     $signInUsersql -> close();
-    // $signInUsersql = 'insert into users (id, name, password) values (' . $userID . ',' .'"'. $signObj -> name.'"' .',' .'"'. $signObj -> password.'"' . ')';
-    // if ($conn -> query($signInUsersql) == true) {
-    //     $responseObj -> signInInfo = '2'; // 注册成功
-    // } else {
-    //     $responseObj -> signInInfo = '0'; // 注册失败
-    // }
-
     echo json_encode($responseObj); // 返回json格式
-
-
     $conn -> close();
 ?>

@@ -9,6 +9,8 @@ const state = {
   ShowTabbar: true, // 控制底部显示隐藏
   language: 0, // 控制APP语言,默认是中文，value: 0 英语: value: 1
   userID: -1, // 登录app的用户ID
+  username: '', // 用户名字
+  usericourl: '', // 用户头像url
   toRemenberUser: 0, // 是否记住用户登录
   title: '', // 保存用户输入的题目
   point: '', // 保存用户输入的提示
@@ -57,6 +59,16 @@ const mutations = {
   },
   changeFlagAddKnow (state, flag) {
     state.flagAddKnow = flag
+  },
+  logOut (state) {
+    state.toRemenberUser = 0
+    state.userID = -1
+  },
+  setusericourl (state, url) {
+    state.usericourl = url
+  },
+  setusername (state, name) {
+    state.username = name
   }
 }
 

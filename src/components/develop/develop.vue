@@ -1,9 +1,9 @@
 <template>
     <div class="develop">
         <el-row>
-          <el-col :span="19" v-for="o in 3" :key="o" :offset="2">
+          <el-col :span="19" v-for="o in 2" :key="o" :offset="2">
             <el-card :body-style="{ padding: '0px'}">
-              <img src="./../../../static/img/699.png" class="image">
+              <!-- <img src="" class="image"> -->
               <div style="padding: 14px;">
                 <span>可爱的蕾姆</span>
                 <div class="bottom clearfix">
@@ -21,7 +21,7 @@
 export default{
   data () {
     return {
-      currentDate: new Date().getYear()
+      currentDate: new Date().toUTCString()
     }
   }
 }

@@ -8,6 +8,14 @@
     class Content{
         var $title = '';
         var $point = '';
+        var $classify0 = '';
+        var $classify1 = '';
+        var $classify2 = '';
+        var $classify3 = '';
+        var $classify4 = '';
+        var $classify5 = '';
+        var $classify6 = '';
+        var $classify7 = '';
     }
     class User{
         var $id = -1;
@@ -29,8 +37,8 @@
     else{
         $obj -> state = '0'; // GET失败
     }
-
-    $stmt = $conn -> prepare("select title, point from know where userID = ?");
+    $sqlstring =  "select title,point,classify.* from know,classify where know.knowID=classify.knowID and know.userID=?"
+    $stmt = $conn -> prepare($sqlstring);
     $stmt -> bind_param('i', $user -> id);
     $stmt -> execute();
     $res = $stmt -> get_result();
@@ -39,6 +47,14 @@
             $cont = new Content;
             $cont -> title = $row['title'];
             $cont -> point = $row['point'];
+            $cont -> classify0 = $row['classify0'];
+            $cont -> classify1 = $row['classify0'];
+            $cont -> classify2 = $row['classify0'];
+            $cont -> classify3 = $row['classify0'];
+            $cont -> classify4 = $row['classify0'];
+            $cont -> classify5 = $row['classify0'];
+            $cont -> classify6 = $row['classify0'];
+            $cont -> classify7 = $row['classify0'];
             array_push($obj->content, $cont);
         }
     }

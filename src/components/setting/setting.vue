@@ -14,7 +14,7 @@
       <div class="settingBox2">
           <el-button>{{LanguageObjArray[index].about}}</el-button>
           <el-button style="margin-left: 0px">{{LanguageObjArray[index].switchAccount}}</el-button>
-          <el-button style="margin-left: 0px">{{LanguageObjArray[index].logOut}}</el-button>
+          <el-button style="margin-left: 0px" @click="LogOut">{{LanguageObjArray[index].logOut}}</el-button>
       </div>
    </div>
 </template>
@@ -39,6 +39,10 @@ export default{
     }
   },
   methods: {
+    LogOut: function () {
+      localStorage.removeItem('token') // 删除
+      this.$store.commit('logOut')
+    },
     selected: function (value) {
       this.$store.commit('changeLanguage', value)
       this.index = value

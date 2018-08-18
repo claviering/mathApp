@@ -18,6 +18,9 @@ users表, userID是key
 | --- | ----  | ---- |
 | name | varchar | 128 |
 | password | varchar | 128 |
+| icourl | varchar | 128 |
+
+iconurl 保存格式 static/img/userID.ico
 
 CREATE TABLE `users` ( `name` VARCHAR(128) NOT NULL , `password` VARCHAR(128) NOT NULL );
 

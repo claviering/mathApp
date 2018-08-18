@@ -3,6 +3,7 @@
     <div class="bank">
         <el-collapse v-model="activeNames" @change="handleChange" v-for="(value, index) in contents" v-bind:key="index">
           <el-collapse-item :title="value.title" :name="index">
+            <el-tag size="mini" type="success" v-for="(classify, index) in value.classify" v-bind:key="index">超小标签</el-tag>
             <div>{{value.point}}</div>
           </el-collapse-item>
         </el-collapse>

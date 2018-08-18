@@ -2,11 +2,20 @@
     <transition name="goRight">
         <div class="leftSideBox" v-show="leftSideShow">
             <div class="leftSideImg">
-                <img src="../../../static/img/th.jpg">
+              <el-upload
+                class="avatar-uploader"
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :show-file-list="false"
+                :on-success="handleAvatarSuccess"
+                :before-upload="beforeAvatarUpload">
+                <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              </el-upload>
             </div>
             <div class="leftSideInfo">
               <span class="icon-login"></span>
-              <p v-on:click="loginIn">{{lang[index].login}}</p>
+              <p v-on:click="loginIn" v-if="!isSignIn">{{lang[index].login}}</p>
+              <p v-if="isSignIn">{{username}}</p>
             </div>
             <div class="leftSetting" v-on:click="goSetting">
               <span class="el-icon-setting"></span>
@@ -20,10 +29,17 @@
 export default{
   data () {
     return {
+      imageUrl: '',
       lang: [{login: '登录', setting: '设置'}, {login: 'Log In', setting: 'Setting'}]
     }
   },
   computed: {
+    username: function () {
+      return this.$store.state.userID
+    },
+    isSignIn: function () {
+      return (this.$store.state.userID > -1)
+    },
     leftSideShow: function () {
       return this.$store.state.leftSideShow
     },
@@ -32,6 +48,20 @@ export default{
     }
   },
   methods: {
+    handleAvatarSuccess (res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw)
+    },
+    beforeAvatarUpload (file) {
+      const isJPG = file.type === 'image/jpeg'
+      const isLt2M = file.size / 1024 / 1024 < 2
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!')
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!')
+      }
+      return isJPG && isLt2M
+    },
     loginIn: function () {
       this.$store.commit('changeLeftSideShow')
       this.$router.push('/loginIn')
@@ -50,8 +80,8 @@ export default{
 <style scoped lang="css">
 @import 'login/style.css';
 .leftSideBox{
-    height: 84%;
-    width: 40%;
+    height: 84%;s
+    width: 50%;
     background-color: rgba(0,0,0,0.5);
     z-index: 100;
     position: absolute;
@@ -83,7 +113,7 @@ export default{
 }
 .leftSetting{
   position: relative;
-  bottom: -60%;
+  bottom: -50%;
 }
 .leftSetting .el-icon-setting{
   padding-left: 30px;
@@ -98,12 +128,38 @@ export default{
     padding-right: 50px;
 }
 .goRight-enter, .goRight-leave-to{
-    left: -40%;
+    left: -50%;
 }
 .goRight-enter-active, .goRight-leave-active{
     transition: left 0.5s;
 }
 .goRight-enter-to, .goRight-leave{
     left: 0%;
+}
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+.el-icon-plus{
+  color: white;
 }
 </style>

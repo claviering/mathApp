@@ -34,7 +34,8 @@ JSON返回示例:
 {
     "state": "1", 
     "loginInfo": "0",
-    "id": '-1'
+    "id": '-1',
+    "icourl": "static/img/id.ico"
 }
 
 参数说明
@@ -98,9 +99,9 @@ JSON返回示例:
 {
     "state": "0"
     "content":[
-       {"title": "title text", "point": "point text"},
-       {"title": "title text", "point": "point text"}
-     ] 
+       {"title": "title text", "point": "point text", "classify": ["classify1", "classify2", ....]},
+       {"title": "title text", "point": "point text", "classify": ["classify1", "classify2", ....]}
+     ],
 }
 
 参数说明
@@ -149,3 +150,7 @@ JSON返回示例:
 参数说明
 
 state: 添加状态        0: 失败    1: POST成功   2: 数据库连接失败 3: 添加成功
+
+## 用户图片请求
+
+接口地址
