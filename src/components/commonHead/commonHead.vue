@@ -34,6 +34,14 @@ export default{
       var point = this.$store.state.point
       var answer = this.$store.state.answer
       var classifies = this.$store.state.classifies
+      if (!(title || point || answer)) {
+        this.showMessage(this, '添加失败,不能全为空', 'error')
+        return
+      }
+      if (classifies.length < 1) {
+        this.showMessage(this, '添加失败,分类不能为空', 'error')
+        return
+      }
       let vueThis = this
       const axios = require('axios')
       let url = '/server/php/addKnow.php'

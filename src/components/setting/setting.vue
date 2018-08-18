@@ -24,6 +24,7 @@ export default{
   data () {
     return {
       index: 0,
+      message: [{'logOutMes': '退出成功'}, {'logOutMes': 'Log Out Successful'}],
       LanguageObjArray: [
         {notif: '通知', placeHolderText: '语言', about: '关于', switchAccount: '切换用户', logOut: '退出登录'},
         {notif: 'Notifications', placeHolderText: 'Language', about: 'About', switchAccount: 'Switch Account', logOut: 'Log Out'}
@@ -39,9 +40,15 @@ export default{
     }
   },
   methods: {
+    showMessage (text = '', type = 'info') {
+      this.$message({message: text, type: type})
+    },
     LogOut: function () {
       localStorage.removeItem('token') // 删除
       this.$store.commit('logOut')
+      let text = this.message[this.index].logOutMes
+      let type = 'success'
+      this.showMessage(text, type)
     },
     selected: function (value) {
       this.$store.commit('changeLanguage', value)

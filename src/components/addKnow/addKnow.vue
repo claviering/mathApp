@@ -6,11 +6,6 @@
             <div :class="item"></div>
         </el-carousel-item>
       </el-carousel>
-      <el-carousel indicator-position="none">
-        <el-carousel-item v-for="item in items2" :key="item">
-            <div :class="item"></div>
-        </el-carousel-item>
-      </el-carousel>
       <div class="addMind">
           <span class="icon-add"></span>
       </div>
@@ -28,14 +23,6 @@ export default {
         // url4: 'd',
         // url5: 'e',
         // url6: 'f'
-      },
-      items2: {
-        // url0: 'f',
-        // url1: 'e',
-        // url2: 'd',
-        // url3: 'c',
-        // url4: 'b',
-        url5: 'a'
       }
     }
   }

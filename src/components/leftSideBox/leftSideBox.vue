@@ -4,7 +4,7 @@
             <div class="leftSideImg">
               <el-upload
                 class="avatar-uploader"
-                action="https://jsonplaceholder.typicode.com/posts/"
+                action="/server/php/uploadImg.php"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload">
@@ -29,13 +29,14 @@
 export default{
   data () {
     return {
-      imageUrl: '',
+      imageUrl: this.$store.state.usericourl,
       lang: [{login: '登录', setting: '设置'}, {login: 'Log In', setting: 'Setting'}]
     }
   },
   computed: {
     username: function () {
-      return this.$store.state.userID
+      let userName = localStorage.getItem('userName') || '' // 取出用户名
+      return userName
     },
     isSignIn: function () {
       return (this.$store.state.userID > -1)

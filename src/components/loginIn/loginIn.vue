@@ -181,7 +181,7 @@ export default {
       const axios = require('axios')
       // let host = this.$store.state.host
       var hash = require('hash.js')
-      var hashPassword = hash.sha256().update(this.form.SignInPassword).digest('hex')
+      var hashPassword = hash.sha256().update(this.form.signUpPassword).digest('hex')
       let url = '/server/php/signUp.php'
       axios.post(url, {
         name: this.form.signUpname,
@@ -195,6 +195,7 @@ export default {
             } else if (response.data.signInInfo === '1') {
               vueThis.showMessage('用户已存在', 'error')
             } else if (response.data.signInInfo === '2') {
+              localStorage.setItem('userName', this.form.signUpname) // 保存用户名
               vueThis.showMessage('注册成功', 'success')
               vueThis.activeName2 = 'first' // 转跳到登录界面
             }

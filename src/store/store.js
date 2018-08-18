@@ -9,7 +9,7 @@ const state = {
   ShowTabbar: true, // 控制底部显示隐藏
   language: 0, // 控制APP语言,默认是中文，value: 0 英语: value: 1
   userID: -1, // 登录app的用户ID
-  username: '', // 用户名字
+  userName: '', // 用户名字
   usericourl: '', // 用户头像url
   toRemenberUser: 0, // 是否记住用户登录
   title: '', // 保存用户输入的题目
@@ -68,7 +68,7 @@ const mutations = {
     state.usericourl = url
   },
   setusername (state, name) {
-    state.username = name
+    state.userName = name
   }
 }
 

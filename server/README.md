@@ -153,4 +153,4 @@ state: 添加状态        0: 失败    1: POST成功   2: 数据库连接失败
 
 ## 用户图片请求
 
-接口地址
+接口地址 /server/php/uploadImg.php

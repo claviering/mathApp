@@ -55,7 +55,7 @@
         }
     }
     $userID = $max + 1; //新用户id
-    $signObj -> icourl = 'static/img/' . $userID . '.ico';
+    $signObj -> icourl = 'static/img/' . 'null.ico'; // 新注册给一个null
     $signInUsersql = $conn -> prepare("insert into users (id, name, password, icourl) values (?,?,?,?)");
     $signInUsersql -> bind_param('dsss', $userID, $signObj -> name,  $signObj -> password, $signObj -> icourl);
     $signInUsersql -> execute();
