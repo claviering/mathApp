@@ -37,7 +37,7 @@
     else{
         $obj -> state = '0'; // GET失败
     }
-    $sqlstring =  "select title,point,classify.* from know,classify where know.knowID=classify.knowID and know.userID=?"
+    $sqlstring =  "select title,point,classify.* from know,classify where know.knowID=classify.knowID and know.userID=?";
     $stmt = $conn -> prepare($sqlstring);
     $stmt -> bind_param('i', $user -> id);
     $stmt -> execute();

@@ -17,7 +17,12 @@ const state = {
   answer: '', // 保存用户输入的答案
   classifies: [], // 保存选择的分类
   flagAddKnow: false, // 标记是否成功添加知识点
-  host: '127.0.0.1' // 服务器地址
+  host: '127.0.0.1', // 服务器地址
+  url: {
+    bank: 'http://127.0.0.1:80/server/php/bank.php',
+    signIn: 'http://127.0.0.1:80/server/php/signIn.php',
+    signUp: 'http://127.0.0.1:80/server/php/signUp.php'
+  }
 }
 
 const mutations = {

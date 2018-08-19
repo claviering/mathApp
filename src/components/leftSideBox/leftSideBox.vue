@@ -14,8 +14,8 @@
             </div>
             <div class="leftSideInfo">
               <span class="icon-login"></span>
-              <p v-on:click="loginIn" v-if="!isSignIn">{{lang[index].login}}</p>
-              <p v-if="isSignIn">{{username}}</p>
+              <p v-on:click="loginIn" v-if="!(this.$store.state.userID > -1)">{{lang[index].login}}</p>
+              <p v-if="(this.$store.state.userID > -1)">{{this.$store.state.userName}}</p>
             </div>
             <div class="leftSetting" v-on:click="goSetting">
               <span class="el-icon-setting"></span>
@@ -34,13 +34,6 @@ export default{
     }
   },
   computed: {
-    username: function () {
-      let userName = localStorage.getItem('userName') || '' // 取出用户名
-      return userName
-    },
-    isSignIn: function () {
-      return (this.$store.state.userID > -1)
-    },
     leftSideShow: function () {
       return this.$store.state.leftSideShow
     },
@@ -88,7 +81,6 @@ export default{
     position: absolute;
 }
 .leftSideImg{
-    padding-left: 10px;
     margin-top: 10px;
     padding-bottom: 10px;
     border-bottom-width: 1px;

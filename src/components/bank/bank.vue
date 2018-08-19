@@ -29,7 +29,8 @@ export default{
     }
   },
   watch: {
-    '$route': 'updateBank' // 路由有变化的时候执行
+    '$route': 'updateBank', // 路由有变化的时候执行
+    'this.$store.state.userID': 'getMyBank'
   },
   methods: {
     updateBank: function () {
@@ -43,13 +44,14 @@ export default{
       let vueThis = this
       const axios = require('axios') // 发送请求
       // let host = this.$store.state.host
-      let url = '/server/php/bank.php'
+      // let url = '/server/php/bank.php'
+      let url = this.$store.state.url.bank
       axios.get(url, {
         params: {'id': id}
       })
         .then(function (response) {
           if (response.data.state === '1') {
-            vueThis.contents = response.data.content
+            vueThis.contents = response.data.content.reverse()
           }
         })
     },

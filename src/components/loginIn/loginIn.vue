@@ -128,7 +128,8 @@ export default {
       // let host = this.$store.state.host
       var hash = require('hash.js')
       var hashPassword = hash.sha256().update(this.form.password).digest('hex')
-      let url = '/server/php/signIn.php'
+      let url = this.$store.state.url.signIn
+      // let url = '/server/php/signIn.php'
       axios.post(url, {
         name: this.form.name,
         password: hashPassword
@@ -140,6 +141,8 @@ export default {
             } else if (response.data.loginInfo === '1') {
               vueThis.showMessage('密码错误', 'error')
             } else if (response.data.loginInfo === '2') {
+              vueThis.$store.commit('setusername', vueThis.form.name)
+              vueThis.$store.commit('changeFlagAddKnow', true)
               vueThis.showMessage('登录成功', 'success')
               vueThis.$store.commit('setUserID', response.data.id)
               vueThis.$store.commit('setusericourl', response.data.icourl)
@@ -147,10 +150,8 @@ export default {
                 vueThis.$store.commit('remenberUser')
                 localStorage.setItem('token', response.data.id) // 保存用户id
               }
-              vueThis.$router.push('/bank')
             }
           }
-          console.log(response)
         })
     },
     onSubmitSignUp () {
@@ -182,7 +183,8 @@ export default {
       // let host = this.$store.state.host
       var hash = require('hash.js')
       var hashPassword = hash.sha256().update(this.form.signUpPassword).digest('hex')
-      let url = '/server/php/signUp.php'
+      let url = this.$store.state.url.signUp
+      // let url = '/server/php/signUp.php'
       axios.post(url, {
         name: this.form.signUpname,
         password: hashPassword,
@@ -195,6 +197,7 @@ export default {
             } else if (response.data.signInInfo === '1') {
               vueThis.showMessage('用户已存在', 'error')
             } else if (response.data.signInInfo === '2') {
+              vueThis.$store.commit('setusername', vueThis.form.name)
               localStorage.setItem('userName', this.form.signUpname) // 保存用户名
               vueThis.showMessage('注册成功', 'success')
               vueThis.activeName2 = 'first' // 转跳到登录界面
