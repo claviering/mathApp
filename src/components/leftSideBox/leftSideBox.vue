@@ -46,6 +46,10 @@ export default{
       this.imageUrl = URL.createObjectURL(file.raw)
     },
     beforeAvatarUpload (file) {
+      if (this.$store.state.userID < 0) {
+        this.$message.error('用户没登录')
+        return
+      }
       const isJPG = file.type === 'image/jpeg'
       const isLt2M = file.size / 1024 / 1024 < 2
       if (!isJPG) {
@@ -74,7 +78,7 @@ export default{
 <style scoped lang="css">
 @import 'login/style.css';
 .leftSideBox{
-    height: 84%;s
+    height: 84%;
     width: 50%;
     background-color: rgba(0,0,0,0.5);
     z-index: 100;
@@ -83,6 +87,7 @@ export default{
 .leftSideImg{
     margin-top: 10px;
     padding-bottom: 10px;
+    padding-left: 10px;
     border-bottom-width: 1px;
     border-bottom-style: solid;
 }

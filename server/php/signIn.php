@@ -10,6 +10,7 @@
     class DateBaseInfo{
         var $id = '';
         var $password = '';
+        var $url = '';
     }
     class Client{
         var $name = '';
@@ -51,12 +52,13 @@
         while ($row = $res -> fetch_assoc()) {
             $DBInfo -> password = $row['password'];
             $DBInfo -> id = $row['id'];
+            $DBInfo -> url = $row['icourl'];
         }
     }
     if ($DBInfo -> password == $ClientInfo -> password) {
         $userObj -> loginInfo = '2'; // 登录成功
         $userObj -> id = $DBInfo -> id;
-        $userObj -> icourl = 'static/img/' . $userObj -> id . '.ico';
+        $userObj -> icourl = $DBInfo -> url;
     } else {
         $userObj -> loginInfo = '1'; // 密码错误
     }

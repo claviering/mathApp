@@ -154,3 +154,29 @@ state: 添加状态        0: 失败    1: POST成功   2: 数据库连接失败
 ## 用户图片请求
 
 接口地址 /server/php/uploadImg.php
+
+## 图片url保存数据库
+
+接口地址 /server/php/saveUrl.php
+
+请求方式 POST
+
+请求格式
+{
+  "id": "userID",
+  "password": "password"
+  "url": "user ico url"
+}
+
+返回格式JSON
+
+返回示例
+{
+  "state": "0"
+}
+
+0: 头像上传失败
+
+1: 头像上传成功
+
+2: 用户密码错误
